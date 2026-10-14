@@ -66,12 +66,15 @@ CI=true AUTO_ALLURE_OPEN=false PW_TEST_HTML_REPORT_OPEN=never npx playwright tes
 It installs Node 24, locked dependencies and Chromium on an Ubuntu runner.
 The existing CI configuration uses one worker and two retries.
 
-Every completed test run uploads `playwright-report` from `reports/playwright-report/`
-and `allure-report` from `allure-report/index.html`, retained for 30 days. Both upload
-steps run after test failures, while the job keeps the failed test outcome. A missing
-report fails its upload step. Download these artifacts from the Actions run page;
-extract the Playwright artifact and open `index.html`, or open the Allure single-file
-`index.html`. The existing reporter generates Allure after native reporters flush.
+Every completed test run uploads two separate HTML files, `playwright-report.html`
+and `allure-report.html`, retained for 30 days. Copies are taken from the existing
+`reports/playwright-report/index.html` and `allure-report/index.html`; uploads use
+`archive: false` rather than ZIP archives. Both preparation/upload pairs run after
+test failures, while the job keeps the failed test outcome. A missing report fails
+its preparation/upload. Download the individual HTML artifacts from the Actions run
+page and open them in a browser. Playwright's external screenshot/video/trace files
+are outside this HTML-only export. Allure uses its existing single-file configuration
+and is generated after native reporters flush.
 The current public QA target and disposable test accounts require no repository secrets.
 
 This executes the 41 committed automated cases. The fifteen unresolved story 87
