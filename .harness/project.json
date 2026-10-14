@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "defaultEnvironment": "qa",
+  "environments": {
+    "qa": {
+      "environmentMode": "test",
+      "apiTargets": ["app"],
+      "databaseTargets": [],
+      "browserTargets": ["app"]
+    }
+  }
+}

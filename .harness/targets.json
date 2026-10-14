@@ -1,0 +1,16 @@
+{
+  "api": {
+    "app": {
+      "baseUrl": "https://www.automationexercise.com/api"
+    }
+  },
+  "databases": {},
+  "browser": {
+    "app": {
+      "origins": [
+        "https://www.automationexercise.com"
+      ],
+      "startUrl": "https://www.automationexercise.com/"
+    }
+  }
+}
