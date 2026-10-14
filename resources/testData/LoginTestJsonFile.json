@@ -1,0 +1,1156 @@
+{
+  "tc116": {
+    "emailBase": "ae-tc116",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC116!"
+  },
+  "tc117": {
+    "emailBase": "ae-tc117",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC117!"
+  },
+  "tc118": {
+    "emailBase": "ae-tc118",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC118!"
+  },
+  "tc119": {
+    "emailBase": "ae-tc119",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Priya Shah",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Priya",
+      "lastName": "Shah",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Priya Shah",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC119!"
+  },
+  "tc120": {
+    "emailBase": "ae-tc120",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "Wrong-TC120!",
+    "seedPassword": "TestOnly-TC120!"
+  },
+  "tc121": {
+    "emailBase": "ae-tc121",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC121!"
+  },
+  "tc122": {
+    "emailBase": "ae-tc122",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC122!"
+  },
+  "tc123": {
+    "emailBase": "ae-tc123",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Maria Lopez",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Maria",
+      "lastName": "Lopez",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Maria Lopez",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC123!"
+  },
+  "tc124": {
+    "emailBase": "ae-tc124",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Winter Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC124!"
+  },
+  "tc125": {
+    "emailBase": "ae-tc125",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC125!"
+  },
+  "tc126": {
+    "emailBase": "ae-tc126",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC126!"
+  },
+  "tc127": {
+    "emailBase": "ae-tc127",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC127!"
+  },
+  "tc128": {
+    "emailBase": "ae-tc128",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC128!",
+    "wrongPassword": "Wrong-TC128!"
+  },
+  "tc129": {
+    "emailBase": "ae-tc129",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC129!"
+  },
+  "tc130": {
+    "emailBase": "ae-tc130",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC130!"
+  },
+  "tc131": {
+    "emailBase": "ae-tc131",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC131!"
+  },
+  "tc132": {
+    "emailBase": "ae-tc132",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC132!"
+  },
+  "tc133": {
+    "emailBase": "ae-tc133",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top",
+      "Men Tshirt"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Alex Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC133!"
+  }
+}

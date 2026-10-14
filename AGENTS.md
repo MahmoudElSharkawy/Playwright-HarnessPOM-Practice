@@ -1,0 +1,11 @@
+<!-- playwright-pom-harness -->
+Use the harness skills linked under `.claude/skills` and `.agents/skills`; resolve linked skills to their real package path for references. To install, update or configure the harness, follow the `harness-setup` skill. If the harness skills are missing, run `npx --no pom-harness setup`. Keep package content immutable and consumer state under `.harness`. Preserve this project's existing instructions and code. Imported team libraries are derive-only.
+
+Never commit or push directly to the default branch. Reuse the ongoing feature branch and add commits; otherwise create one named `automation/<source-id>-<slug>` for generated suites, `harness/<topic>` for harness setup or updates, `feature/<topic>` for new framework code, or `fix/<topic>` for fixes. Deliver through a pull request, and commit, push or open one only with the user's authorization.
+<!-- /playwright-pom-harness -->
+
+For `/execute-test`, use the default `qa` environment. The configured application does not require login. Runs may create, change, or delete application test data under the `test` environment policy.
+
+When a case needs API setup, verification or cleanup, consult `resources/apisCollections/automation-exercise.postman_collection.json` and its README, using the `qa` API target `app`. Derive parameterized operations from the collection while preserving the case's actions and expectations. Follow the README's request-encoding and runtime-support notes; collection variables are placeholders, not approved test inputs.
+
+Preview ADO bug filing and result publication first. Use the delivery commands without `--execute`; add `--execute` only after the user explicitly authorizes the concrete ADO write. Externally provisioned credentials belong only in the ignored local `.env` file or CI secret storage; use `AZURE_PAT` for ADO. Disposable test-account passwords are business inputs in the owning spec's paired JSON or test-owned runtime variables, following the harness test-data skill.

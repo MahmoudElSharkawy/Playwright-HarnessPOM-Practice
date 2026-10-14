@@ -1,0 +1,623 @@
+{
+  "info": {
+    "name": "Automation Exercise API reference",
+    "description": "Derived on 2026-10-04 from https://www.automationexercise.com/api_list. This collection preserves 14 documented scenarios and is a derive-only project reference, not a runnable test suite. All inputs are empty placeholders. Credentials must come from protected local references or case-owned test data. Native harness 3.2.0 accepts query parameters and JSON bodies but lacks form-body encoding; consult README.md before deriving /execute-test steps. Documented response codes describe JSON responseCode values, not asserted HTTP transport statuses.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.automationexercise.com/api",
+      "type": "string"
+    },
+    {
+      "key": "search_product",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "name",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "email",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "password",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "title",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "birth_date",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "birth_month",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "birth_year",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "firstname",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "lastname",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "company",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "address1",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "address2",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "country",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "zipcode",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "state",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "city",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "mobile_number",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "invalid_email",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "invalid_password",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 - List catalog products",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/productsList",
+        "description": "Derived from source API scenario 1: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 200. HTTP status must be observed separately.\nExpect a products array.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations."
+      },
+      "response": []
+    },
+    {
+      "name": "02 - Reject POST on product catalog",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/productsList",
+        "description": "Derived from source API scenario 2: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 405. HTTP status must be observed separately.\nNegative-method scenario.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations."
+      },
+      "response": []
+    },
+    {
+      "name": "03 - List catalog brands",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/brandsList",
+        "description": "Derived from source API scenario 3: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 200. HTTP status must be observed separately.\nExpect a brands array.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations."
+      },
+      "response": []
+    },
+    {
+      "name": "04 - Reject PUT on brand catalog",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/brandsList",
+        "description": "Derived from source API scenario 4: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 405. HTTP status must be observed separately.\nNegative-method scenario.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations."
+      },
+      "response": []
+    },
+    {
+      "name": "05 - Search catalog by term",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/searchProduct",
+        "description": "Derived from source API scenario 5: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 200. HTTP status must be observed separately.\nExpect filtered products; form encoding is required.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations.",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "search_product",
+              "value": "{{search_product}}",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "06 - Search with an omitted term",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/searchProduct",
+        "description": "Derived from source API scenario 6: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 400. HTTP status must be observed separately.\nOmit the search_product field.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations."
+      },
+      "response": []
+    },
+    {
+      "name": "07 - Check accepted account credentials",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/verifyLogin",
+        "description": "Derived from source API scenario 7: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 200. HTTP status must be observed separately.\nUse a scenario-owned existing test account; form encoding is required.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations.",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "{{email}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{password}}",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "08 - Check credentials with email omitted",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/verifyLogin",
+        "description": "Derived from source API scenario 8: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 400. HTTP status must be observed separately.\nOmit the email field; form encoding is required.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations.",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "password",
+              "value": "{{password}}",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "09 - Reject DELETE on credential check",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/verifyLogin",
+        "description": "Derived from source API scenario 9: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 405. HTTP status must be observed separately.\nNegative-method scenario.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations."
+      },
+      "response": []
+    },
+    {
+      "name": "10 - Check rejected account credentials",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/verifyLogin",
+        "description": "Derived from source API scenario 10: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 404. HTTP status must be observed separately.\nUse deliberately invalid scenario inputs; form encoding is required.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations.",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "{{invalid_email}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{invalid_password}}",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "11 - Register a test account",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/createAccount",
+        "description": "Derived from source API scenario 11: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 201. HTTP status must be observed separately.\nSupply the documented profile fields as form data; declare ownership and cleanup.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations.",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "{{name}}",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "{{email}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{password}}",
+              "type": "text"
+            },
+            {
+              "key": "title",
+              "value": "{{title}}",
+              "type": "text"
+            },
+            {
+              "key": "birth_date",
+              "value": "{{birth_date}}",
+              "type": "text"
+            },
+            {
+              "key": "birth_month",
+              "value": "{{birth_month}}",
+              "type": "text"
+            },
+            {
+              "key": "birth_year",
+              "value": "{{birth_year}}",
+              "type": "text"
+            },
+            {
+              "key": "firstname",
+              "value": "{{firstname}}",
+              "type": "text"
+            },
+            {
+              "key": "lastname",
+              "value": "{{lastname}}",
+              "type": "text"
+            },
+            {
+              "key": "company",
+              "value": "{{company}}",
+              "type": "text"
+            },
+            {
+              "key": "address1",
+              "value": "{{address1}}",
+              "type": "text"
+            },
+            {
+              "key": "address2",
+              "value": "{{address2}}",
+              "type": "text"
+            },
+            {
+              "key": "country",
+              "value": "{{country}}",
+              "type": "text"
+            },
+            {
+              "key": "zipcode",
+              "value": "{{zipcode}}",
+              "type": "text"
+            },
+            {
+              "key": "state",
+              "value": "{{state}}",
+              "type": "text"
+            },
+            {
+              "key": "city",
+              "value": "{{city}}",
+              "type": "text"
+            },
+            {
+              "key": "mobile_number",
+              "value": "{{mobile_number}}",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "12 - Remove a test account",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/deleteAccount",
+        "description": "Derived from source API scenario 12: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 200. HTTP status must be observed separately.\nUse only the intended scenario-owned account; form encoding is required.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations.",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "{{email}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{password}}",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "13 - Revise a test account profile",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/updateAccount",
+        "description": "Derived from source API scenario 13: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 200. HTTP status must be observed separately.\nSupply the documented profile fields as form data.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations.",
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "name",
+              "value": "{{name}}",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "value": "{{email}}",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "{{password}}",
+              "type": "text"
+            },
+            {
+              "key": "title",
+              "value": "{{title}}",
+              "type": "text"
+            },
+            {
+              "key": "birth_date",
+              "value": "{{birth_date}}",
+              "type": "text"
+            },
+            {
+              "key": "birth_month",
+              "value": "{{birth_month}}",
+              "type": "text"
+            },
+            {
+              "key": "birth_year",
+              "value": "{{birth_year}}",
+              "type": "text"
+            },
+            {
+              "key": "firstname",
+              "value": "{{firstname}}",
+              "type": "text"
+            },
+            {
+              "key": "lastname",
+              "value": "{{lastname}}",
+              "type": "text"
+            },
+            {
+              "key": "company",
+              "value": "{{company}}",
+              "type": "text"
+            },
+            {
+              "key": "address1",
+              "value": "{{address1}}",
+              "type": "text"
+            },
+            {
+              "key": "address2",
+              "value": "{{address2}}",
+              "type": "text"
+            },
+            {
+              "key": "country",
+              "value": "{{country}}",
+              "type": "text"
+            },
+            {
+              "key": "zipcode",
+              "value": "{{zipcode}}",
+              "type": "text"
+            },
+            {
+              "key": "state",
+              "value": "{{state}}",
+              "type": "text"
+            },
+            {
+              "key": "city",
+              "value": "{{city}}",
+              "type": "text"
+            },
+            {
+              "key": "mobile_number",
+              "value": "{{mobile_number}}",
+              "type": "text"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "14 - Look up an account by email",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": "{{baseUrl}}/getUserDetailByEmail?email={{email}}",
+        "description": "Derived from source API scenario 14: https://www.automationexercise.com/api_list\nDocumented JSON body responseCode: 200. HTTP status must be observed separately.\nSupply email as a query parameter; expect a user object.\nReference only: derive a parameterized operation with case-owned inputs. See README.md for harness 3.2.0 form-body limitations."
+      },
+      "response": []
+    }
+  ]
+}

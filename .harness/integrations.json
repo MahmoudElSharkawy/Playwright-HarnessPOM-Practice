@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "ado": {
+    "organizationUrl": "https://dev.azure.com/abdelarhmanellithy1",
+    "project": "2ndTestProject",
+    "credentialRef": "AZURE_PAT"
+  }
+}

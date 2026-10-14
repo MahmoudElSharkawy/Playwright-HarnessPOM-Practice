@@ -1,0 +1,1710 @@
+{
+  "tc98": {
+    "emailBase": "ae-tc98",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Ava Carter",
+      "title": "Mrs",
+      "birthDay": "15",
+      "birthMonth": "5",
+      "birthYear": "1992",
+      "firstName": "Ava",
+      "lastName": "Carter",
+      "company": "Carter Studio",
+      "address": "42 Market Street",
+      "address2": "",
+      "country": "United States",
+      "state": "California",
+      "city": "San Diego",
+      "zip": "92101",
+      "mobile": "5551234001"
+    },
+    "registeredProfile": {
+      "name": "Ava Carter",
+      "title": "Mrs",
+      "birthDay": "15",
+      "birthMonth": "5",
+      "birthYear": "1992",
+      "firstName": "Ava",
+      "lastName": "Carter",
+      "company": "Carter Studio",
+      "address": "42 Market Street",
+      "address2": "",
+      "country": "United States",
+      "state": "California",
+      "city": "San Diego",
+      "zip": "92101",
+      "mobile": "5551234001"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Ava Carter",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC98!"
+  },
+  "tc99": {
+    "emailBase": "ae-tc99",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Noah Bennett",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Noah",
+      "lastName": "Bennett",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Noah Bennett",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Noah",
+      "lastName": "Bennett",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Noah Bennett",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC99!"
+  },
+  "tc100": {
+    "emailBase": "ae-tc100",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Existing Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Existing",
+      "lastName": "Customer",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Existing Customer",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC100!"
+  },
+  "tc101": {
+    "emailBase": "ae-tc101",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Mia Turner",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Mia",
+      "lastName": "Turner",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Mia Turner",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Mia",
+      "lastName": "Turner",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Mia Turner",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC101!"
+  },
+  "tc102": {
+    "emailBase": "ae-tc102",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Liam Hughes",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Liam",
+      "lastName": "Hughes",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Liam Hughes",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Liam",
+      "lastName": "Hughes",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Liam Hughes",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC102!"
+  },
+  "tc103": {
+    "emailBase": "ae-tc103",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Sofia Reed",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Sofia",
+      "lastName": "Reed",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Sofia Reed",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Sofia",
+      "lastName": "Reed",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Sofia Reed",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC103!"
+  },
+  "tc104": {
+    "emailBase": "ae-tc104",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Ethan Price",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Ethan",
+      "lastName": "Price",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Ethan Price",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Ethan",
+      "lastName": "Price",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Ethan Price",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC104!"
+  },
+  "tc105": {
+    "emailBase": "ae-tc105",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Harper Collins",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Harper",
+      "lastName": "Collins",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Harper Collins",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Harper",
+      "lastName": "Collins",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Harper Collins",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC105!"
+  },
+  "tc106": {
+    "emailBase": "ae-tc106",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Olivia Morgan",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Olivia",
+      "lastName": "Morgan",
+      "company": "Test Company",
+      "address": "88 Lake Avenue",
+      "address2": "",
+      "country": "United States",
+      "state": "New York",
+      "city": "Albany",
+      "zip": "12207",
+      "mobile": "5551234009"
+    },
+    "registeredProfile": {
+      "name": "Olivia Morgan",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Olivia",
+      "lastName": "Morgan",
+      "company": "Test Company",
+      "address": "88 Lake Avenue",
+      "address2": "",
+      "country": "United States",
+      "state": "New York",
+      "city": "Albany",
+      "zip": "12207",
+      "mobile": "5551234009"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Olivia Morgan",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [
+        "Your delivery address",
+        "Mr. Olivia Morgan",
+        "Test Company",
+        "88 Lake Avenue",
+        "Albany New York 12207",
+        "United States",
+        "5551234009"
+      ],
+      "billingAddress": [
+        "Your billing address",
+        "Mr. Olivia Morgan",
+        "Test Company",
+        "88 Lake Avenue",
+        "Albany New York 12207",
+        "United States",
+        "5551234009"
+      ],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC106!"
+  },
+  "tc107": {
+    "emailBase": "ae-tc107",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Guest Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Guest",
+      "lastName": "Customer",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Guest Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Guest",
+      "lastName": "Customer",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Guest Customer",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC107!"
+  },
+  "tc108": {
+    "emailBase": "ae-tc108",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Lucas Ward",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Lucas",
+      "lastName": "Ward",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Lucas Ward",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Lucas",
+      "lastName": "Ward",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Lucas Ward",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC108!"
+  },
+  "tc109": {
+    "emailBase": "ae-tc109",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Ella Brooks",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Ella",
+      "lastName": "Brooks",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Ella Brooks",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Ella",
+      "lastName": "Brooks",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Ella Brooks",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC109!"
+  },
+  "tc110": {
+    "emailBase": "ae-tc110",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Mason Gray",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Mason",
+      "lastName": "Gray",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Mason Gray",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Mason",
+      "lastName": "Gray",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Mason Gray",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC110!"
+  },
+  "tc111": {
+    "emailBase": "ae-tc111",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Security Check Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Security",
+      "lastName": "Check Customer",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Security Check Customer",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC111!"
+  },
+  "tc112": {
+    "emailBase": "ae-tc112",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Grace Patel",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Grace",
+      "lastName": "Patel",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Grace Patel",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Grace",
+      "lastName": "Patel",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Grace Patel",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC112!"
+  },
+  "tc113": {
+    "emailBase": "ae-tc113",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Feedback Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Feedback",
+      "lastName": "Customer",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Alex Carter",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Alex",
+      "lastName": "Carter",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Feedback Customer",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC113!"
+  },
+  "tc114": {
+    "emailBase": "ae-tc114",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Henry Scott",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Henry",
+      "lastName": "Scott",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Henry Scott",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Henry",
+      "lastName": "Scott",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Henry Scott",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC114!"
+  },
+  "tc115": {
+    "emailBase": "ae-tc115",
+    "emailDomain": "example.test",
+    "profile": {
+      "name": "Zoe Miller",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Zoe",
+      "lastName": "Miller",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "registeredProfile": {
+      "name": "Zoe Miller",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Zoe",
+      "lastName": "Miller",
+      "company": "Test Company",
+      "address": "13 Test Lane",
+      "address2": "",
+      "country": "United States",
+      "state": "TestState",
+      "city": "TestCity",
+      "zip": "12345",
+      "mobile": "0000000000"
+    },
+    "products": [
+      "Blue Top"
+    ],
+    "searchTerm": "top",
+    "keyboardOrder": [
+      true,
+      true,
+      true
+    ],
+    "registrationKeyboardOrder": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "expected": {
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "accountHeading": "Enter Account Information",
+      "created": "ACCOUNT CREATED!",
+      "deleted": "ACCOUNT DELETED!",
+      "loggedIn": "Logged in as Zoe Miller",
+      "loginError": "Your email or password is incorrect!",
+      "duplicateError": "Email Address already exist!",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "registerLogin": "Register / Login",
+      "deliveryAddress": [],
+      "billingAddress": [],
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "deleteApi": {
+        "status": 200,
+        "responseCode": 200,
+        "message": "Account deleted!"
+      },
+      "presentApi": 200,
+      "absentApi": 404,
+      "httpStatus": 200
+    },
+    "password": "TestOnly-TC115!"
+  }
+}
