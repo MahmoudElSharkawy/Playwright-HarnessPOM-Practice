@@ -317,3 +317,96 @@ export async function expectToHaveSecretValue(
 export async function expectToHaveURL(page: Page, expected: string | RegExp, options?: RetryOptions): Promise<void> {
   await expect(page, `Expect the page URL to be ${fmt(expected)}`).toHaveURL(expected, options);
 }
+
+/** Compare every nonmissing attribute value without making collection order part of the oracle. */
+export async function expectToHaveAttributeSet(subject: string, locator: Locator, attribute: string, expected: (string | null)[]): Promise<void> {
+  await expect.poll(async () => {
+    const values = await locator.evaluateAll((elements, name) => elements.map(element => element.getAttribute(name)), attribute);
+    return values.length > 0 && values.every(value => value !== null && value.length > 0) ? values.sort() : null;
+  }, {
+    message: `Expect ${subject} to contain exactly ${fmt(expected)} →`,
+  }).toEqual([...expected].sort());
+}
+
+/** Allow integrated controls to share a border; keep their row clear of following content. */
+export async function expectToBeAlignedBefore(
+  subject: string, first: Locator, second: Locator, following: Locator,
+): Promise<void> {
+  await expect.poll(async () => {
+    const [left, right, next] = await Promise.all([first.boundingBox(), second.boundingBox(), following.boundingBox()]);
+    return !!left && !!right && !!next
+      && Math.abs(left.y + left.height / 2 - right.y - right.height / 2) < Math.min(left.height, right.height) / 4
+      && Math.max(left.y + left.height, right.y + right.height) <= next.y;
+  }, { message: `Expect ${subject} to be aligned without covering following content →` }).toBe(true);
+}
+
+/** Poll all matched boxes and their text, including items reached by vertical scrolling. */
+export async function expectToFitViewportWidth(subject: string, locator: Locator): Promise<void> {
+  await expect.poll(() => locator.evaluateAll(elements => elements.length > 0 && elements.every(element => {
+    const box = element.getBoundingClientRect();
+    return box.width > 0 && box.left >= 0 && box.right <= window.innerWidth
+      && element.scrollWidth <= element.clientWidth && element.scrollHeight <= element.clientHeight;
+  })), { message: `Expect ${subject} to fit the viewport without clipping →` }).toBe(true);
+}
+
+export async function expectToHaveNoHorizontalOverflow(subject: string, page: Page): Promise<void> {
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), {
+    message: `Expect ${subject} to stay within the viewport horizontally`,
+  }).toBe(true);
+}
+
+export async function expectToHaveScrolledFrom(subject: string, page: Page, previousY: number): Promise<void> {
+  await expect.poll(() => page.evaluate(() => window.scrollY), {
+    message: `Expect ${subject} to scroll below position ${previousY}`,
+  }).toBeGreaterThan(previousY);
+}
+
+export async function expectToShowPlaceholder(subject: string, locator: Locator): Promise<void> {
+  await expect.poll(() => locator.evaluate(element => element.matches(':placeholder-shown')), {
+    message: `Expect ${subject} to display its placeholder →`,
+  }).toBe(true);
+}
+
+export async function expectNotToShowPlaceholder(subject: string, locator: Locator): Promise<void> {
+  await expect.poll(() => locator.evaluate(element => element.matches(':placeholder-shown')), {
+    message: `Expect ${subject} not to display its placeholder →`,
+  }).toBe(false);
+}
+
+/** Nearby controls may share a border, as in an integrated input/action pair. */
+export async function expectToBeAdjacent(subject: string, first: Locator, second: Locator): Promise<void> {
+  await expect.poll(async () => {
+    const [left, right] = await Promise.all([first.boundingBox(), second.boundingBox()]);
+    if (!left || !right) return false;
+    const gap = Math.max(0, right.x - left.x - left.width, left.x - right.x - right.width);
+    const overlap = Math.max(0, Math.min(left.x + left.width, right.x + right.width) - Math.max(left.x, right.x));
+    return Math.abs(left.y + left.height / 2 - right.y - right.height / 2) < Math.min(left.height, right.height) / 4
+      && gap <= Math.max(left.height, right.height) && overlap <= Math.min(left.width, right.width) / 4;
+  }, { message: `Expect ${subject} to be next to each other →` }).toBe(true);
+}
+
+/** Check every rendered control; vertical offscreen position is not CSS invisibility. */
+export async function expectAllToBeVisibleAndEnabled(subject: string, locator: Locator): Promise<void> {
+  await expect(locator, `Expect ${subject} to contain at least one control →`).not.toHaveCount(0);
+  for (const control of await locator.all()) {
+    await expect(control, `Expect every ${subject} to be visible →`).toBeVisible();
+    await expect(control, `Expect every ${subject} to be enabled →`).toBeEnabled();
+  }
+  await expect.poll(() => locator.evaluateAll(elements => elements.length > 0 && elements.every(element =>
+    getComputedStyle(element).pointerEvents !== 'none',
+  )), { message: `Expect every ${subject} to accept pointer input →` }).toBe(true);
+}
+
+/** Hit-test the currently reachable targets; page actions own all scrolling. */
+export async function expectViewportTargetsToReceivePointer(subject: string, locator: Locator): Promise<void> {
+  await expect.poll(() => locator.evaluateAll(elements => {
+    const targets = elements.map(element => {
+      const box = element.getBoundingClientRect();
+      return { element, x: box.left + box.width / 2, y: box.top + box.height / 2 };
+    }).filter(target => target.x >= 0 && target.x < innerWidth && target.y >= 0 && target.y < innerHeight);
+    return targets.length > 0 && targets.every(target => {
+      const hit = document.elementFromPoint(target.x, target.y);
+      return !!hit && (hit === target.element || target.element.contains(hit));
+    });
+  }), { message: `Expect reachable ${subject} to receive pointer input without obstruction →` }).toBe(true);
+}

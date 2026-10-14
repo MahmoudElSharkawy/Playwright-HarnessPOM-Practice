@@ -1,0 +1,721 @@
+{
+  "version": 1,
+  "id": "ado-story-87",
+  "title": "Search the Product Catalog",
+  "scenarios": [
+    {
+      "id": "tc-134",
+      "title": "Verify Product Search Input and Action are Displayed on Products Page",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "134"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Navigate to the Products page.",
+          "expected": [
+            "The Products page loads successfully."
+          ]
+        },
+        {
+          "action": "Observe the page content.",
+          "expected": [
+            "A search input field is visible. A search button or action icon is visible next to the search input field."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-135",
+      "title": "Validate SEARCHED PRODUCTS Section Appears After Successful Search",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "135"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Shirt'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter a valid product name (e.g., 'Shirt') into the search input field.",
+          "expected": [
+            "The search term is entered into the input field."
+          ]
+        },
+        {
+          "action": "Click the search action button.",
+          "expected": [
+            "The page updates to display a 'SEARCHED PRODUCTS' section. This section contains a list of products."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-136",
+      "title": "Verify Search Results Contain Products Related to Search Term",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "136"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Dress'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter 'Dress' into the product search input field and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section is displayed."
+          ]
+        },
+        {
+          "action": "Review the product names and descriptions in the search results.",
+          "expected": [
+            "All displayed products in the 'SEARCHED PRODUCTS' section have 'Dress' in their name or description, and no unrelated products are shown."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-137",
+      "title": "Validate Products from Search Results Can Be Added to Shopping Cart",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "137"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Shoes'; Product: 'Running Shoes'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Search for 'Shoes' and confirm 'Running Shoes' is in the results.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section displays 'Running Shoes'."
+          ]
+        },
+        {
+          "action": "Click the 'Add to cart' action for 'Running Shoes' directly from the search results.",
+          "expected": [
+            "A confirmation message indicates the product was added to the cart, and 'Continue Shopping' and 'View Cart' actions are provided."
+          ]
+        },
+        {
+          "action": "Click 'View Cart'.",
+          "expected": [
+            "The Shopping Cart page opens, displaying 'Running Shoes' with the correct quantity and price."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-138",
+      "title": "Verify Search Results are Not Affected by Category Filters",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "138"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Shoes'; Category: 'Women'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select 'Women' from the category navigation.",
+          "expected": [
+            "Only products categorized under 'Women' are displayed."
+          ]
+        },
+        {
+          "action": "Enter 'Shoes' into the search input field and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section appears."
+          ]
+        },
+        {
+          "action": "Review the product names in the search results.",
+          "expected": [
+            "Products like 'Women's Running Shoes' AND 'Men's Running Shoes' are displayed, confirming the search ignores the active category filter and searches the full catalog. (Assuming the search is intended to be global, not category-specific)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-139",
+      "title": "Validate Search with No Matching Products Displays Empty Results Message",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "139"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'NonExistentProduct'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter 'NonExistentProduct' into the search input field and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section is displayed, but it contains a message indicating 'No products found' or similar, instead of an empty product list."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-140",
+      "title": "Validate Search Input Handles Special Characters Safely",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "140"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'T-Shirt w/ Logo & Size XL (2024)'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter the search term 'T-Shirt w/ Logo & Size XL (2024)' (including special characters like '&', '/', '(', ')') into the search input field.",
+          "expected": [
+            "The search term is accepted without validation errors."
+          ]
+        },
+        {
+          "action": "Submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section is displayed. The product 'T-Shirt w/ Logo & Size XL (2024)' is correctly displayed in the search results."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-141",
+      "title": "Validate Search Results Display Consistently Across UI and API (if applicable)",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "141"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'T-Shirt'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter 'T-Shirt' into the search input and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section displays 'Red T-Shirt' and 'Blue T-Shirt'."
+          ]
+        },
+        {
+          "action": "Intercept the network request for the search and examine the API response (e.g., using browser developer tools).",
+          "expected": [
+            "The API response body contains data for 'Red T-Shirt' and 'Blue T-Shirt', matching the products displayed in the UI."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-142",
+      "title": "Validate Search Results Pagination or Infinite Scroll Behavior",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "142"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Book'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter 'Book' into the search input and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section displays the first set of results (e.g., 10 books). Pagination controls (e.g., 'Next' button, page numbers) or a loading indicator for infinite scroll are visible if more results exist."
+          ]
+        },
+        {
+          "action": "If pagination is used: Click the 'Next' page button.\nIf infinite scroll is used: Scroll down to the bottom of the results.",
+          "expected": [
+            "If pagination: The next set of search results is displayed, replacing the previous set.\nIf infinite scroll: The next set of search results is dynamically loaded and appended to the existing list."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-143",
+      "title": "Validate Search Works for Partially Matched Product Names",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "143"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Jacket'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter 'Jacket' into the search input field and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section is displayed. All products containing 'Jacket' in their name (e.g., 'Leather Jacket', 'Denim Jacket', 'Winter Jacket') are listed in the results."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-144",
+      "title": "Validate Product Search Displays in Responsive Layout (Mobile)",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "144"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Shirt'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Open the Products page in a mobile viewport.",
+          "expected": [
+            "The page layout adapts to the mobile screen. The search input and search action are visible and correctly aligned, not overlapping other elements."
+          ]
+        },
+        {
+          "action": "Enter 'Shirt' into the search input and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section appears. Product cards or list items are displayed in a mobile-optimized layout, ensuring readability and tappable areas."
+          ]
+        },
+        {
+          "action": "Attempt to scroll through the search results.",
+          "expected": [
+            "Scrolling works smoothly, and content remains within the viewport without horizontal scrolling."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-145",
+      "title": "Validate Search Input with Leading/Trailing Spaces Is Trimmed",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "145"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: ' Keyboard '",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter ' Keyboard ' (with leading and trailing spaces) into the search input field and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section is displayed. The product 'Keyboard' is correctly found and displayed in the search results, indicating the spaces were trimmed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-146",
+      "title": "Validate Search with Empty Search Term Returns All Products (Regression)",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "146"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: '' (empty string)",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Ensure the search input field is empty.",
+          "expected": [
+            "The search input field is clear."
+          ]
+        },
+        {
+          "action": "Click the search action button without entering any text.",
+          "expected": [
+            "The 'ALL PRODUCTS' catalog is displayed, showing all available products, similar to when the Products page is initially opened. The 'SEARCHED PRODUCTS' section may not appear, or if it does, it displays all products."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-147",
+      "title": "Validate Search Results Retain Quantity Input and Add to Cart Action",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "147"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Watch'; Product: 'Vintage Watch'; Quantity: 3",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Search for 'Watch'.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section is displayed with 'Vintage Watch' in the results."
+          ]
+        },
+        {
+          "action": "Click 'View Product' for 'Vintage Watch' from the search results.",
+          "expected": [
+            "The Product Details Page for 'Vintage Watch' opens."
+          ]
+        },
+        {
+          "action": "Verify the presence of the quantity input field and the 'Add to cart' button. Set quantity to 3.",
+          "expected": [
+            "A quantity input field and an 'Add to cart' button are visible. The quantity input field is updated to 3."
+          ]
+        },
+        {
+          "action": "Click 'Add to cart' and then 'View Cart'.",
+          "expected": [
+            "The Shopping Cart page opens, and 'Vintage Watch' is displayed with a quantity of 3 and its correct total price."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-148",
+      "title": "Validate Search Term Preserved After Navigating Away and Back",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "148"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Gaming Mouse'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter 'Gaming Mouse' into the search input field and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section is displayed with 'Gaming Mouse'."
+          ]
+        },
+        {
+          "action": "Click on a product from the search results to navigate to its Product Details Page.",
+          "expected": [
+            "The Product Details Page opens successfully."
+          ]
+        },
+        {
+          "action": "Use the browser's back button or application's back navigation to return to the Products page.",
+          "expected": [
+            "The Products page is displayed, and the search input field still contains 'Gaming Mouse'. The previous search results may or may not be displayed, but the search term is preserved."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-149",
+      "title": "Validate Search Performance with Long Search Term",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "149"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nLong search term: 'ThisIsAnExtremelyLongProductNameThatWouldBeVeryUnlikelyToExistButWeNeedToTestWhatHappensWhenAUserInputsSomethingOfThisLengthIntoTheSearchField'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter the exceptionally long search term into the search input field.",
+          "expected": [
+            "The input field accepts the long text without truncation or immediate error."
+          ]
+        },
+        {
+          "action": "Submit the search.",
+          "expected": [
+            "The system remains responsive. Either 'No products found' message is displayed quickly, or if by chance a product matches, it appears without significant delay or system freeze. The page does not crash."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-150",
+      "title": "Validate Keyboard Navigation for Search Input and Button",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "150"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Monitor'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Navigate to the Products page. Use the 'Tab' key to cycle through interactive elements.",
+          "expected": [
+            "Focus moves sequentially through interactive elements, including the search input field and the search button, with a clear visual focus indicator."
+          ]
+        },
+        {
+          "action": "When the search input field is focused, type 'Monitor'.",
+          "expected": [
+            "The text 'Monitor' is entered into the search input field."
+          ]
+        },
+        {
+          "action": "Use the 'Tab' key to move focus to the search button, then press 'Enter' or 'Spacebar'.",
+          "expected": [
+            "The search is submitted, and the 'SEARCHED PRODUCTS' section is displayed with 'Monitor' in the results."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-151",
+      "title": "Validate Search Results with Localized Product Names",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "151"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Hemd'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter the German search term 'Hemd' into the search input field and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section is displayed. The product 'Hemd' (or its English equivalent if the search cross-references) is correctly listed in the search results."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-152",
+      "title": "Validate Search Input Field Placeholder Text",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "152"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Navigate to the Products page and observe the search input field.",
+          "expected": [
+            "The search input field displays placeholder text like 'Search products...' or similar, which disappears when the user starts typing."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-153",
+      "title": "Validate Concurrent Searches Do Not Conflict",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "153"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch 1: 'Laptop'; Search 2: 'Phone'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Quickly enter 'Laptop' in the search field and submit, then immediately enter 'Phone' and submit again before the first search completes.",
+          "expected": [
+            "The system processes both searches. The final displayed 'SEARCHED PRODUCTS' section accurately reflects the results for 'Phone', which was the most recent search, without showing any residual 'Laptop' results."
+          ]
+        }
+      ]
+    }
+  ]
+}

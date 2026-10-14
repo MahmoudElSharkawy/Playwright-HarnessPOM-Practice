@@ -1,0 +1,23 @@
+{
+  "tc134": {
+    "expected": { "catalogHeading": "All Products" }
+  },
+  "tc135": {
+    "term": "Shirt",
+    "expected": { "catalogHeading": "All Products", "initialSearch": "", "searchedHeading": "Searched Products" }
+  },
+  "tc144": {
+    "term": "Shirt",
+    "viewport": { "width": 375, "height": 812 },
+    "scrollDistance": 620,
+    "expected": { "catalogHeading": "All Products", "initialSearch": "", "searchedHeading": "Searched Products" }
+  },
+  "tc146": {
+    "term": "",
+    "expected": { "catalogHeading": "All Products", "emptySearchHeadingPattern": "^(All|Searched) Products$" }
+  },
+  "tc152": {
+    "typingSample": "Shirt",
+    "expected": { "catalogHeading": "All Products", "placeholder": "Search Product", "initialSearch": "" }
+  }
+}
