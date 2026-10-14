@@ -1,5 +1,17 @@
 import { expect, type BrowserContext, type Locator, type Page } from '@playwright/test';
 
+/** Return the starting position; the owning validation waits for the wheel's effect. */
+export async function scrollViewport(page: Page, distance: number): Promise<number> {
+  const previousY = await page.evaluate(() => window.scrollY);
+  await page.mouse.wheel(0, distance);
+  return previousY;
+}
+
+/** Read one attribute from every matched element; retain missing values for the caller's oracle. */
+export async function readAttributeValues(locator: Locator, attribute: string): Promise<(string | null)[]> {
+  return locator.evaluateAll((elements, name) => elements.map(element => element.getAttribute(name)), attribute);
+}
+
 /**
  * Shared GUI-control mechanics for async-initializing custom widgets (utils family —
  * the bounded retries below are exactly what iron laws 3-4 ban from business classes).

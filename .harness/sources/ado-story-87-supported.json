@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "id": "ado-story-87-supported",
+  "title": "Search the Product Catalog",
+  "scenarios": [
+    {
+      "id": "tc-134",
+      "title": "Verify Product Search Input and Action are Displayed on Products Page",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "134"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Navigate to the Products page.",
+          "expected": [
+            "The Products page loads successfully."
+          ]
+        },
+        {
+          "action": "Observe the page content.",
+          "expected": [
+            "A search input field is visible. A search button or action icon is visible next to the search input field."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-135",
+      "title": "Validate SEARCHED PRODUCTS Section Appears After Successful Search",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "135"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Shirt'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Enter a valid product name (e.g., 'Shirt') into the search input field.",
+          "expected": [
+            "The search term is entered into the input field."
+          ]
+        },
+        {
+          "action": "Click the search action button.",
+          "expected": [
+            "The page updates to display a 'SEARCHED PRODUCTS' section. This section contains a list of products."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-144",
+      "title": "Validate Product Search Displays in Responsive Layout (Mobile)",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "144"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: 'Shirt'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Open the Products page in a mobile viewport.",
+          "expected": [
+            "The page layout adapts to the mobile screen. The search input and search action are visible and correctly aligned, not overlapping other elements."
+          ]
+        },
+        {
+          "action": "Enter 'Shirt' into the search input and submit the search.",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section appears. Product cards or list items are displayed in a mobile-optimized layout, ensuring readability and tappable areas."
+          ]
+        },
+        {
+          "action": "Attempt to scroll through the search results.",
+          "expected": [
+            "Scrolling works smoothly, and content remains within the viewport without horizontal scrolling."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-146",
+      "title": "Validate Search with Empty Search Term Returns All Products (Regression)",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "146"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term: '' (empty string)",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Ensure the search input field is empty.",
+          "expected": [
+            "The search input field is clear."
+          ]
+        },
+        {
+          "action": "Click the search action button without entering any text.",
+          "expected": [
+            "The 'ALL PRODUCTS' catalog is displayed, showing all available products, similar to when the Products page is initially opened. The 'SEARCHED PRODUCTS' section may not appear, or if it does, it displays all products."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-152",
+      "title": "Validate Search Input Field Placeholder Text",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "152"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Required setup is available",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Navigate to the Products page and observe the search input field.",
+          "expected": [
+            "The search input field displays placeholder text like 'Search products...' or similar, which disappears when the user starts typing."
+          ]
+        }
+      ]
+    }
+  ]
+}
