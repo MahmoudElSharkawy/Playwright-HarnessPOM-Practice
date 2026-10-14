@@ -32,7 +32,7 @@ npx playwright test --headed                                 # watch the browser
 npx playwright test --project=chromium                       # one browser project
 ```
 
-The existing suites cover registration and login/logout, with 36 cases across two specs.
+The suites cover registration, login/logout and product search, with 41 cases across three specs.
 
 ## Environment flags
 
@@ -53,11 +53,31 @@ PowerShell sets these as `$env:AUTO_ALLURE_OPEN='false'`; bash inline as
 (disables desktop behavior and enables retries/`forbidOnly` in the config),
 `AUTO_ALLURE_OPEN=false`, and `PW_TEST_HTML_REPORT_OPEN=never` (suppresses the
 HTML reporter's `open: 'always'` server), as the harness package's optional
-CI templates demonstrate. No CI pipeline is configured in this project.
+CI templates demonstrate.
 
 ```bash
 CI=true AUTO_ALLURE_OPEN=false PW_TEST_HTML_REPORT_OPEN=never npx playwright test --project=chromium
 ```
+
+## GitHub Actions
+
+[The workflow](.github/workflows/playwright.yml) runs the full configured suite with
+`npm test` on pull requests targeting `main`, pushes to `main`, and manual dispatch.
+It installs Node 24, locked dependencies and Chromium on an Ubuntu runner.
+The existing CI configuration uses one worker and two retries.
+
+Every completed test run uploads `playwright-report` from `reports/playwright-report/`
+and `allure-report` from `allure-report/index.html`, retained for 30 days. Both upload
+steps run after test failures, while the job keeps the failed test outcome. A missing
+report fails its upload step. Download these artifacts from the Actions run page;
+extract the Playwright artifact and open `index.html`, or open the Allure single-file
+`index.html`. The existing reporter generates Allure after native reporters flush.
+The current public QA target and disposable test accounts require no repository secrets.
+
+This executes the 41 committed automated cases. The fifteen unresolved story 87
+cases remain documented in [the status table](docs/story-87-status.md); they are not
+included as passing automation. TC126 has a known QA behavior mismatch, so a full run
+may fail while still providing both report artifacts.
 
 ## Report locations
 
