@@ -50,7 +50,7 @@ jobs:
 
       - name: Prepare Allure HTML file
         if: always()
-        run: cp allure-report/index.html reports/allure-report.html
+        run: cp reports/allure-history/*/index.html reports/allure-report.html
 
       - name: Upload Allure HTML file
         if: always()
@@ -58,5 +58,14 @@ jobs:
         with:
           path: reports/allure-report.html
           archive: false
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Upload Allure report history
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: allure-history
+          path: reports/allure-history/
           retention-days: 30
           if-no-files-found: error
