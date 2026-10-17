@@ -336,8 +336,12 @@ test.describe('Story 84 — Customer sign in and sign out', () => {
     await loginPage.verifyLoginPage(data.expected.loginHeading, data.expected.signupHeading);
     await headerPage.verifyGuest();
     await headerPage.openCart();
-
-    await cartPage.verifyCheckoutAvailable();
+    await cartPage.verifyCartEmpty(data.expected.emptyCart);
+    await productsPage.navigate();
+    await productsPage.addProductToCart(data.products[0]);
+    await productsPage.addProductToCart(data.products[1]);
+    await headerPage.openCart();
+    await cartPage.verifyProducts(data.products);
     await cartPage.proceedToCheckout();
     await cartPage.verifyRegisterLoginRequired(data.expected.registerLogin);
   });

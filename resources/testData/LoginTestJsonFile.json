@@ -686,6 +686,7 @@
       "addressHeading": "Address Details",
       "orderHeading": "Review Your Order",
       "registerLogin": "Register / Login",
+      "emptyCart": "Cart is empty!",
       "deliveryAddress": [],
       "billingAddress": [],
       "createApi": {
