@@ -1,0 +1,51 @@
+{
+  "tc154": {
+    "women": { "name": "Women", "subCategories": ["Dress", "Tops", "Saree"] },
+    "men": { "name": "Men", "subCategories": ["Tshirts", "Jeans"] },
+    "kids": { "name": "Kids", "subCategories": ["Dress", "Tops & Shirts"] },
+    "expected": { "catalogHeading": "All Products" }
+  },
+  "tc156": {
+    "brandExamples": ["Polo", "H&M", "Madame"],
+    "expected": { "catalogHeading": "All Products", "api": { "status": 200, "responseCode": 200 } }
+  },
+  "tc157": {
+    "brand": "Polo",
+    "expected": {
+      "catalogHeading": "All Products",
+      "brandHeading": "Brand - Polo Products",
+      "api": { "status": 200, "responseCode": 200 }
+    }
+  },
+  "tc159": {
+    "brand": "H&M",
+    "category": "Men",
+    "subCategory": "Jeans",
+    "expected": {
+      "catalogHeading": "All Products",
+      "brandHeading": "Brand - H&M Products",
+      "categoryHeading": "Men - Jeans Products",
+      "api": { "status": 200, "responseCode": 200 }
+    }
+  },
+  "tc162": {
+    "expected": { "catalogHeading": "All Products", "api": { "status": 200, "responseCode": 200 } }
+  },
+  "tc167": {
+    "categories": { "women": "Women", "men": "Men", "kids": "Kids" },
+    "category": "Kids",
+    "subCategories": ["Dress", "Tops & Shirts"],
+    "selectedSubCategory": "Tops & Shirts",
+    "brands": { "first": "Polo", "second": "H&M" },
+    "groups": { "categories": "main categories", "subCategories": "sub-categories", "brands": "brands" },
+    "expected": {
+      "catalogHeading": "All Products",
+      "categoryOrder": [true, true, true],
+      "subCategoryOrder": [true, true],
+      "categoryHeading": "Kids - Tops & Shirts Products",
+      "brandOrder": [true, true],
+      "brandHeading": "Brand - H&M Products",
+      "api": { "status": 200, "responseCode": 200 }
+    }
+  }
+}

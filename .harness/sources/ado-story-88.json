@@ -1,0 +1,841 @@
+{
+  "version": 1,
+  "id": "ado-story-88",
+  "title": "Browse Products by Category and Brand",
+  "scenarios": [
+    {
+      "id": "tc-154",
+      "title": "Validate main categories (Women, Men, Kids) and sub-categories are displayed in product navigation",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "154"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Locate the product navigation panel.",
+          "expected": [
+            "The product navigation panel is visible on the page."
+          ]
+        },
+        {
+          "action": "Verify the presence of 'Women', 'Men', and 'Kids' as main categories.",
+          "expected": [
+            "The categories 'Women', 'Men', and 'Kids' are clearly displayed."
+          ]
+        },
+        {
+          "action": "Expand each main category (Women, Men, Kids) to view its sub-categories.",
+          "expected": [
+            "Each main category (Women, Men, Kids) expands to reveal its corresponding sub-categories."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-155",
+      "title": "Verify selecting a sub-category displays products for that specific category",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "155"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. Product navigation displays categories and sub-categories.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSpecific sub-category (e.g., 'Dresses' under 'Women') with associated products available.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Navigate to a main category (e.g., 'Women') and select a specific sub-category (e.g., 'Dresses').",
+          "expected": [
+            "The page navigates to the 'Dresses' category-products page."
+          ]
+        },
+        {
+          "action": "Observe the displayed products.",
+          "expected": [
+            "Only products belonging to the 'Dresses' sub-category are displayed in the product list."
+          ]
+        },
+        {
+          "action": "Verify the page title or breadcrumbs reflect the selected sub-category.",
+          "expected": [
+            "The page title or breadcrumbs clearly indicate 'Dresses' as the current filter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-156",
+      "title": "Validate available brands are displayed in the side navigation on the Products page",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "156"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Locate the side navigation panel.",
+          "expected": [
+            "The side navigation panel is visible."
+          ]
+        },
+        {
+          "action": "Verify the 'Brands' section is present and lists various brands.",
+          "expected": [
+            "A 'Brands' section is displayed in the side navigation, listing available product brands (e.g., 'Polo', 'H&M', 'Madame', 'Roadster')."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-157",
+      "title": "Verify selecting a brand displays products belonging to that specific brand",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "157"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. Side navigation displays brands.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSpecific brand (e.g., 'Polo') with associated products available.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select a specific brand (e.g., 'Polo') from the 'Brands' section in the side navigation.",
+          "expected": [
+            "The page navigates to the 'Polo' brand page."
+          ]
+        },
+        {
+          "action": "Observe the displayed products.",
+          "expected": [
+            "Only products belonging to the 'Polo' brand are displayed in the product list."
+          ]
+        },
+        {
+          "action": "Verify the page title or breadcrumbs reflect the selected brand.",
+          "expected": [
+            "The page title or breadcrumbs clearly indicate 'Polo' as the current filter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-158",
+      "title": "Verify switching from a category selection to a brand selection updates product list",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "158"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. Product navigation displays categories and brands.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSub-category 'Dresses' and brand 'Polo' with relevant products.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select a sub-category (e.g., 'Dresses') from the category navigation.",
+          "expected": [
+            "The product list displays only 'Dresses'."
+          ]
+        },
+        {
+          "action": "Now, select a brand (e.g., 'Polo') from the brand navigation, without deselecting the category first.",
+          "expected": [
+            "The product list updates to display only products from the 'Polo' brand, effectively overriding or replacing the category filter."
+          ]
+        },
+        {
+          "action": "Verify the page title or breadcrumbs reflect the selected brand, not the previous category.",
+          "expected": [
+            "The page title or breadcrumbs clearly indicate 'Polo' as the current filter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-159",
+      "title": "Verify switching from a brand selection to a category selection updates product list",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "159"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. Product navigation displays categories and brands.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nBrand 'H&M' and sub-category 'Jeans' with relevant products.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select a brand (e.g., 'H&M') from the brand navigation.",
+          "expected": [
+            "The product list displays only products from the 'H&M' brand."
+          ]
+        },
+        {
+          "action": "Now, select a sub-category (e.g., 'Jeans') from the category navigation, without deselecting the brand first.",
+          "expected": [
+            "The product list updates to display only products from the 'Jeans' sub-category, effectively overriding or replacing the brand filter."
+          ]
+        },
+        {
+          "action": "Verify the page title or breadcrumbs reflect the selected sub-category, not the previous brand.",
+          "expected": [
+            "The page title or breadcrumbs clearly indicate 'Jeans' as the current filter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-160",
+      "title": "Validate empty product list when selected category has no products",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "160"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. A sub-category exists that currently has no products associated with it.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSub-category 'Seasonal Wear' with 0 products.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select the sub-category that has no products.",
+          "expected": [
+            "The page navigates to the selected category page."
+          ]
+        },
+        {
+          "action": "Observe the product display area.",
+          "expected": [
+            "A clear 'No products found for this category' or similar message is displayed, and no products are listed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-161",
+      "title": "Validate empty product list when selected brand has no products",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "161"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. A brand exists that currently has no products associated with it.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nBrand 'New Arrivals Co.' with 0 products.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select the brand that has no products.",
+          "expected": [
+            "The page navigates to the selected brand page."
+          ]
+        },
+        {
+          "action": "Observe the product display area.",
+          "expected": [
+            "A clear 'No products found for this brand' or similar message is displayed, and no products are listed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-162",
+      "title": "Verify navigating to Products page initially displays ALL PRODUCTS catalog",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "162"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. N/A",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Navigate to the Products page.",
+          "expected": [
+            "The 'ALL PRODUCTS' catalog and full product list are displayed by default."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-163",
+      "title": "Validate API response for categories and sub-categories contains expected structure",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "163"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Access to the product catalog API.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Make an API request to retrieve product categories and sub-categories.",
+          "expected": [
+            "The API returns a successful response (e.g., 200 OK)."
+          ]
+        },
+        {
+          "action": "Verify the response JSON structure includes main categories (e.g., 'Women', 'Men', 'Kids') and nested sub-categories.",
+          "expected": [
+            "The response contains an array of categories, each with an 'id', 'name', and an array of 'subCategories' with their 'id' and 'name'."
+          ]
+        },
+        {
+          "action": "Verify category and sub-category names match expected values from business rules or test data.",
+          "expected": [
+            "Category names 'Women', 'Men', 'Kids' and their corresponding sub-categories are present and correctly spelled."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-164",
+      "title": "Validate API response for brands contains expected structure and values",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "164"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Access to the product catalog API.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Make an API request to retrieve product brands.",
+          "expected": [
+            "The API returns a successful response (e.g., 200 OK)."
+          ]
+        },
+        {
+          "action": "Verify the response JSON structure includes an array of brands, each with an 'id' and 'name'.",
+          "expected": [
+            "The response contains an array of brand objects, each with 'id' and 'name' fields."
+          ]
+        },
+        {
+          "action": "Verify brand names match expected values from test data (e.g., 'Polo', 'H&M').",
+          "expected": [
+            "Brand names are present and correctly spelled in the response."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-165",
+      "title": "Verify category/brand filters are applied consistently between UI and API requests",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "165"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. Network monitoring tools (e.g., browser developer console) are active.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSub-category 'T-Shirts' and Brand 'Roadster' with products.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select a sub-category (e.g., 'T-Shirts') from the navigation.",
+          "expected": [
+            "The UI displays 'T-Shirts'. A network request is observed, including 'category=T-Shirts' or equivalent in its parameters."
+          ]
+        },
+        {
+          "action": "Verify the API response for the filtered products contains only 'T-Shirts'.",
+          "expected": [
+            "The API response data confirms all returned products belong to the 'T-Shirts' category."
+          ]
+        },
+        {
+          "action": "Clear the category filter (if available) or navigate back to 'All Products'.",
+          "expected": [
+            "The product list is reset, and subsequent API requests (if any) do not contain the category filter."
+          ]
+        },
+        {
+          "action": "Select a brand (e.g., 'Roadster') from the side navigation.",
+          "expected": [
+            "The UI displays 'Roadster' products. A network request is observed, including 'brand=Roadster' or equivalent in its parameters."
+          ]
+        },
+        {
+          "action": "Verify the API response for the filtered products contains only 'Roadster' brand products.",
+          "expected": [
+            "The API response data confirms all returned products belong to the 'Roadster' brand."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-166",
+      "title": "Validate side navigation visibility and usability on mobile devices",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "166"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Access to a browser with developer tools or a mobile device.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Open the Products page on a mobile viewport (e.g., using browser developer tools to simulate a mobile device or on an actual mobile device).",
+          "expected": [
+            "The page renders in a mobile-optimized layout."
+          ]
+        },
+        {
+          "action": "Locate and interact with the side navigation control (e.g., hamburger menu).",
+          "expected": [
+            "The side navigation control is visible and, when tapped, reveals the categories and brands list."
+          ]
+        },
+        {
+          "action": "Select a category and a brand from the revealed navigation.",
+          "expected": [
+            "Categories and brands are selectable, and the product list updates correctly, similar to desktop behavior."
+          ]
+        },
+        {
+          "action": "Close the side navigation (if applicable) and verify the main content area is usable.",
+          "expected": [
+            "The side navigation can be closed, and the product list remains displayed and interactive."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-167",
+      "title": "Validate keyboard navigation for categories and brands in side menu",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "167"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Use the Tab key to navigate through interactive elements on the page until focus is on the category navigation section.",
+          "expected": [
+            "Focus moves sequentially to the category links/dropdowns."
+          ]
+        },
+        {
+          "action": "Use the Enter key or spacebar to expand a category (if collapsible) and then tab through sub-categories.",
+          "expected": [
+            "Categories expand, and focus moves to individual sub-category links."
+          ]
+        },
+        {
+          "action": "Press Enter on a sub-category link.",
+          "expected": [
+            "The page updates to display products for the selected sub-category."
+          ]
+        },
+        {
+          "action": "Repeat the process for the brand navigation section.",
+          "expected": [
+            "Focus moves to brand links, and selecting a brand via Enter updates the product list accordingly."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-168",
+      "title": "Validate category/brand navigation when no product data is available (API failure)",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "168"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Mock API responses or a controlled environment where the product data API can be configured to return an empty/error response for categories, brands, or product listings.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Navigate to the Products page while the category/brand API is configured to return an empty list or an error.",
+          "expected": [
+            "The product navigation panel (categories and brands) is either empty, hidden, or displays a 'No categories/brands available' message. The main product list might also be empty or show a similar error/empty state message."
+          ]
+        },
+        {
+          "action": "Ensure the application does not crash or display technical errors to the end-user.",
+          "expected": [
+            "The page remains functional, displaying user-friendly messages or gracefully handling the missing data without breaking the UI."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-169",
+      "title": "Validate consistent filter behavior after using product search",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "169"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSearch term 'dress', Category 'Women', Brand 'Madame'.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Apply a category filter (e.g., 'Women' -> 'Dresses').",
+          "expected": [
+            "The product list shows only 'Dresses'."
+          ]
+        },
+        {
+          "action": "Use the product search input to search for a product (e.g., 'red dress').",
+          "expected": [
+            "The 'SEARCHED PRODUCTS' section appears with results related to 'red dress'."
+          ]
+        },
+        {
+          "action": "Verify the previously applied category filter is no longer active (i.e., the search results are not additionally filtered by 'Dresses').",
+          "expected": [
+            "The search results are comprehensive based on the search term, and the category filter is either cleared or shown as inactive."
+          ]
+        },
+        {
+          "action": "Clear the search term and then try to apply a brand filter (e.g., 'Polo').",
+          "expected": [
+            "The product list updates to show only 'Polo' brand products, and the search results are no longer displayed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-170",
+      "title": "Validate long category names wrap or truncate gracefully in side navigation",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "170"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Access to a browser with developer tools to simulate various viewport widths.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nA test category with an exceptionally long name (e.g., 'Accessories for Specialized Outdoor Activities and Extreme Sports Enthusiasts').",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Inject or configure a category with an exceptionally long name into the navigation.",
+          "expected": [
+            "The long category name is visible in the side navigation."
+          ]
+        },
+        {
+          "action": "Resize the browser window to narrow widths, including typical mobile breakpoints.",
+          "expected": [
+            "The long category name either wraps cleanly to the next line, or truncates with an ellipsis, without causing horizontal scrolling in the navigation panel or overlapping adjacent elements."
+          ]
+        },
+        {
+          "action": "Verify that interaction with the long category (e.g., clicking to expand/filter) still functions correctly.",
+          "expected": [
+            "Clicking on the long category name performs the expected filtering or expansion action."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-171",
+      "title": "Validate breadcrumbs update correctly with category and brand selections",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "171"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nCategory 'Women' > 'Dresses', Brand 'Polo'.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select sub-category 'Dresses' under 'Women'.",
+          "expected": [
+            "The breadcrumbs display 'Home > Women > Dresses'."
+          ]
+        },
+        {
+          "action": "Select brand 'Polo'.",
+          "expected": [
+            "The breadcrumbs update to display 'Home > Polo' (assuming brand filters replace category filters in breadcrumbs)."
+          ]
+        },
+        {
+          "action": "Click on 'Home' in the breadcrumbs.",
+          "expected": [
+            "The user is navigated back to the home page or the 'ALL PRODUCTS' view."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-172",
+      "title": "Verify clear all filters functionality resets category and brand selections",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "172"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. A clear filter action/button is available (e.g., 'Clear All Filters').",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSub-category 'Tops', Brand 'H&M'.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Apply a category filter (e.g., 'Women' -> 'Tops') and a brand filter (e.g., 'H&M').",
+          "expected": [
+            "The product list displays products filtered by 'Tops' and then by 'H&M'."
+          ]
+        },
+        {
+          "action": "Click the 'Clear All Filters' button or equivalent action.",
+          "expected": [
+            "All active category and brand filters are removed."
+          ]
+        },
+        {
+          "action": "Verify the product list displays the complete 'ALL PRODUCTS' catalog.",
+          "expected": [
+            "The product list is no longer filtered, showing all available products."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-173",
+      "title": "Verify URL parameters update correctly for category and brand filters",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "173"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSub-category 'Shoes' (ID: shoes123), Brand 'Nike' (ID: nike456).",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select sub-category 'Shoes'.",
+          "expected": [
+            "The URL is updated to include a parameter like '?category=shoes123' or similar."
+          ]
+        },
+        {
+          "action": "Select brand 'Nike'.",
+          "expected": [
+            "The URL is updated to include a parameter like '?brand=nike456' or similar (potentially alongside or replacing the category parameter)."
+          ]
+        },
+        {
+          "action": "Copy the URL with filters, open a new browser tab, and paste the URL.",
+          "expected": [
+            "The new tab opens the Products page with the previously applied category and/or brand filters still active."
+          ]
+        }
+      ]
+    }
+  ]
+}

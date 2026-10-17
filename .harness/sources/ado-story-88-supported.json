@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "id": "ado-story-88-supported",
+  "title": "Browse Products by Category and Brand",
+  "scenarios": [
+    {
+      "id": "tc-154",
+      "title": "Validate main categories (Women, Men, Kids) and sub-categories are displayed in product navigation",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "154"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Locate the product navigation panel.",
+          "expected": [
+            "The product navigation panel is visible on the page."
+          ]
+        },
+        {
+          "action": "Verify the presence of 'Women', 'Men', and 'Kids' as main categories.",
+          "expected": [
+            "The categories 'Women', 'Men', and 'Kids' are clearly displayed."
+          ]
+        },
+        {
+          "action": "Expand each main category (Women, Men, Kids) to view its sub-categories.",
+          "expected": [
+            "Each main category (Women, Men, Kids) expands to reveal its corresponding sub-categories."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-156",
+      "title": "Validate available brands are displayed in the side navigation on the Products page",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "156"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Locate the side navigation panel.",
+          "expected": [
+            "The side navigation panel is visible."
+          ]
+        },
+        {
+          "action": "Verify the 'Brands' section is present and lists various brands.",
+          "expected": [
+            "A 'Brands' section is displayed in the side navigation, listing available product brands (e.g., 'Polo', 'H&M', 'Madame', 'Roadster')."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-157",
+      "title": "Verify selecting a brand displays products belonging to that specific brand",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "157"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. Side navigation displays brands.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nSpecific brand (e.g., 'Polo') with associated products available.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select a specific brand (e.g., 'Polo') from the 'Brands' section in the side navigation.",
+          "expected": [
+            "The page navigates to the 'Polo' brand page."
+          ]
+        },
+        {
+          "action": "Observe the displayed products.",
+          "expected": [
+            "Only products belonging to the 'Polo' brand are displayed in the product list."
+          ]
+        },
+        {
+          "action": "Verify the page title or breadcrumbs reflect the selected brand.",
+          "expected": [
+            "The page title or breadcrumbs clearly indicate 'Polo' as the current filter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-159",
+      "title": "Verify switching from a brand selection to a category selection updates product list",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "159"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.\n2. Product navigation displays categories and brands.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nBrand 'H&M' and sub-category 'Jeans' with relevant products.",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Select a brand (e.g., 'H&M') from the brand navigation.",
+          "expected": [
+            "The product list displays only products from the 'H&M' brand."
+          ]
+        },
+        {
+          "action": "Now, select a sub-category (e.g., 'Jeans') from the category navigation, without deselecting the brand first.",
+          "expected": [
+            "The product list updates to display only products from the 'Jeans' sub-category, effectively overriding or replacing the brand filter."
+          ]
+        },
+        {
+          "action": "Verify the page title or breadcrumbs reflect the selected sub-category, not the previous brand.",
+          "expected": [
+            "The page title or breadcrumbs clearly indicate 'Jeans' as the current filter."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-162",
+      "title": "Verify navigating to Products page initially displays ALL PRODUCTS catalog",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "162"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. N/A",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Navigate to the Products page.",
+          "expected": [
+            "The 'ALL PRODUCTS' catalog and full product list are displayed by default."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-167",
+      "title": "Validate keyboard navigation for categories and brands in side menu",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "167"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. The shopper is on the Products page.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nN/A",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Use the Tab key to navigate through interactive elements on the page until focus is on the category navigation section.",
+          "expected": [
+            "Focus moves sequentially to the category links/dropdowns."
+          ]
+        },
+        {
+          "action": "Use the Enter key or spacebar to expand a category (if collapsible) and then tab through sub-categories.",
+          "expected": [
+            "Categories expand, and focus moves to individual sub-category links."
+          ]
+        },
+        {
+          "action": "Press Enter on a sub-category link.",
+          "expected": [
+            "The page updates to display products for the selected sub-category."
+          ]
+        },
+        {
+          "action": "Repeat the process for the brand navigation section.",
+          "expected": [
+            "Focus moves to brand links, and selecting a brand via Enter updates the product list accordingly."
+          ]
+        }
+      ]
+    }
+  ]
+}

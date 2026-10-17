@@ -121,6 +121,17 @@ export class ProductsPage {
     });
   }
 
+  async verifyCatalogListed(expectedProductIds: number[]): Promise<void> {
+    await step('Verify the full product list is displayed', async () =>
+      expectToHaveAttributeSet(
+        'the listed catalog product destinations',
+        this.productDetails_link,
+        'href',
+        expectedProductIds.map(id => `/product_details/${id}`),
+      ),
+    );
+  }
+
   async verifySearchControls(): Promise<void> {
     await step('Verify the product search input and action are available', async () => {
       await expectToBeVisible('the product search input', this.search_input);
