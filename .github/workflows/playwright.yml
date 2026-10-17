@@ -35,22 +35,18 @@ jobs:
       - name: Run full Playwright suite
         run: npm test
 
-      - name: Prepare Playwright HTML file
-        if: always()
-        run: cp reports/playwright-report/index.html reports/playwright-report.html
-
-      - name: Upload Playwright HTML file
+      - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          path: reports/playwright-report.html
-          archive: false
+          name: playwright-report
+          path: reports/playwright-report/
           retention-days: 30
           if-no-files-found: error
 
       - name: Prepare Allure HTML file
         if: always()
-        run: cp allure-report/index.html reports/allure-report.html
+        run: cp reports/allure-report/index.html reports/allure-report.html
 
       - name: Upload Allure HTML file
         if: always()
