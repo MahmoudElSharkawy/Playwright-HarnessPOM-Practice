@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "id": "ado-story-91-supported",
+  "title": "Proceed to Checkout and Review Delivery, Billing and Order Details",
+  "scenarios": [
+    {
+      "id": "tc-174",
+      "title": "Validate unauthenticated user is prompted to register/login when proceeding to checkout",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "174"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Customer is not authenticated.\n2. Add a product to the cart (e.g., via Product Catalog).",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Navigate to the Shopping Cart page.",
+          "expected": [
+            "The Shopping Cart page is displayed with the added product(s)."
+          ]
+        },
+        {
+          "action": "Select 'Proceed To Checkout'.",
+          "expected": [
+            "The user is redirected to the 'Register / Login' page or an equivalent path for authentication/registration before proceeding with checkout."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-175",
+      "title": "Verify authenticated user sees Address Details and Review Your Order sections on checkout page",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "175"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Customer is authenticated.\n2. Add a product to the cart (e.g., via Product Catalog).",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Navigate to the Shopping Cart page.",
+          "expected": [
+            "The Shopping Cart page is displayed with the added product(s)."
+          ]
+        },
+        {
+          "action": "Select 'Proceed To Checkout'.",
+          "expected": [
+            "The checkout page is displayed, containing both 'Address Details' and 'Review Your Order' sections."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-176",
+      "title": "Validate delivery address matches registration address at checkout",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "176"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Register a new customer account with delivery address: '123 Main St, Anytown, CA 90210'.\n2. Authenticate the customer.\n3. Add a product to the cart (e.g., via Product Catalog).",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nRegistered Address: 123 Main St, Anytown, CA 90210",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Navigate to the Shopping Cart page and select 'Proceed To Checkout'.",
+          "expected": [
+            "The checkout page is displayed."
+          ]
+        },
+        {
+          "action": "Review the 'Address Details' section on the checkout page.",
+          "expected": [
+            "The delivery address displayed in the 'Address Details' section is '123 Main St, Anytown, CA 90210', matching the registered address."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-177",
+      "title": "Validate billing address matches registration address at checkout",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "177"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Register a new customer account with billing address: '123 Main St, Anytown, CA 90210'.\n2. Authenticate the customer.\n3. Add a product to the cart (e.g., via Product Catalog).",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nRegistered Address: 123 Main St, Anytown, CA 90210",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Navigate to the Shopping Cart page and select 'Proceed To Checkout'.",
+          "expected": [
+            "The checkout page is displayed."
+          ]
+        },
+        {
+          "action": "Review the 'Address Details' section on the checkout page.",
+          "expected": [
+            "The billing address displayed in the 'Address Details' section is '123 Main St, Anytown, CA 90210', matching the registered address."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-178",
+      "title": "Validate ability to enter order comment and select Place Order",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "178"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Authenticate customer.\n2. Add a product to the cart.\n3. Navigate to the checkout page and ensure 'Address Details' and 'Review Your Order' sections are displayed.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nOrder Comment: 'Please deliver after 5 PM.'",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Locate the 'Order Comment' input field (or equivalent) on the checkout page.",
+          "expected": [
+            "An input field for 'Order Comment' is visible."
+          ]
+        },
+        {
+          "action": "Enter a comment: 'Please deliver after 5 PM.'",
+          "expected": [
+            "The comment 'Please deliver after 5 PM.' is successfully entered into the field."
+          ]
+        },
+        {
+          "action": "Locate and select the 'Place Order' button.",
+          "expected": [
+            "The 'Place Order' button is visible and clickable, and selecting it initiates the order placement process (e.g., navigates to the payment step)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-179",
+      "title": "Verify cart contents are preserved when an unauthenticated user logs in via checkout path",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "179"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Customer is not authenticated.\n2. Register a new customer account.\n3. Add 'Men Tshirt' (quantity 2) to the cart.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Test Setup & Data:\nProduct: 'Men Tshirt', Quantity: 2",
+          "expected": [
+            "Required test setup and data are ready for use."
+          ]
+        },
+        {
+          "action": "Navigate to the Shopping Cart page and select 'Proceed To Checkout'.",
+          "expected": [
+            "User is presented with the 'Register / Login' path."
+          ]
+        },
+        {
+          "action": "Choose to 'Login' and enter valid credentials for the registered account.",
+          "expected": [
+            "Authentication completes successfully."
+          ]
+        },
+        {
+          "action": "Navigate to the Shopping Cart page or proceed with checkout (if automatically redirected).",
+          "expected": [
+            "The 'Men Tshirt' (quantity 2) product is still present in the cart, confirming pre-login contents were preserved."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tc-180",
+      "title": "Handle empty cart when attempting to proceed to checkout",
+      "externalReferences": [
+        {
+          "system": "ado",
+          "id": "180"
+        }
+      ],
+      "steps": [
+        {
+          "action": "Preconditions:\n1. Ensure the shopping cart is empty.",
+          "expected": [
+            "Preconditions are met"
+          ]
+        },
+        {
+          "action": "Navigate to the Shopping Cart page.",
+          "expected": [
+            "The Shopping Cart page is displayed, indicating it is empty."
+          ]
+        },
+        {
+          "action": "Attempt to interact with the 'Proceed To Checkout' action (e.g., click a disabled button, or observe message).",
+          "expected": [
+            "The 'Proceed To Checkout' button is disabled, or an informative message (e.g., 'Your cart is empty. Please add products to proceed to checkout.') is displayed, preventing advancement to checkout."
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 import { type Page, type Locator } from '@playwright/test';
 import { step } from 'allure-js-commons';
 import { applications } from '../config/applications';
-import { expectToHaveText, expectToContainText, expectToBeVisible, expectToBeHidden, expectToHaveURL } from '../utils/Expects';
+import { gotoInteractive } from '../utils/UiControls';
+import { expectToHaveText, expectToContainText, expectToBeVisible, expectToBeHidden, expectToHaveURL, expectToHaveCount } from '../utils/Expects';
 
 export class CartPage {
   readonly page: Page;
@@ -23,7 +24,21 @@ export class CartPage {
     this.registerLogin_link = page.getByRole('link', { name: 'Register / Login', exact: true });
   }
 
+  private product_row(productName: string): Locator {
+    return this.page.getByRole('row').filter({
+      has: this.page.getByRole('link', { name: productName, exact: true }),
+    });
+  }
+
+  private productQuantity_cell(productName: string): Locator {
+    return this.product_row(productName).locator('.cart_quantity');
+  }
+
   ///// Actions
+  async navigate(): Promise<void> {
+    await step('Navigate to the Shopping Cart', async () => gotoInteractive(this.page, this.url));
+  }
+
   async proceedToCheckout(): Promise<void> {
     await step('Proceed To Checkout', async () => this.checkout_button.click());
   }
@@ -54,6 +69,14 @@ export class CartPage {
     await step('Verify checkout requires Register / Login', async () => {
       await expectToHaveText('the checkout authentication path', this.registerLogin_link, expectedPath);
       await expectToBeVisible('the checkout authentication path', this.registerLogin_link);
+    });
+  }
+
+  async verifyProductQuantity(productName: string, expectedQuantity: string): Promise<void> {
+    await step(`Verify ${productName} has cart quantity ${expectedQuantity}`, async () => {
+      const product = this.product_row(productName);
+      await expectToHaveCount('the exact cart product row', product, 1, 'row');
+      await expectToHaveText('the cart product quantity', this.productQuantity_cell(productName), expectedQuantity);
     });
   }
 }
