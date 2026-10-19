@@ -1,0 +1,15 @@
+{
+  "body_path": "memory/project.md",
+  "content_hash": "sha256:4cfee7e67c1fac5eb064a57b1b1e44a6fdc7f69a713aa09fcf2e9e7d70115ad3",
+  "created_at": "2026-10-19T15:10:19+03:00",
+  "evidence": [],
+  "id": "project.harness-test",
+  "source": {
+    "kind": "system"
+  },
+  "status": "active",
+  "tags": [],
+  "title": "Harness Test",
+  "type": "project",
+  "updated_at": "2026-10-19T15:10:19+03:00"
+}

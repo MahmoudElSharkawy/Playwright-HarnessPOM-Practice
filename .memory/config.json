@@ -1,0 +1,11 @@
+{
+  "memory": {
+    "autoIndex": true,
+    "defaultTokenBudget": 2000
+  },
+  "project": {
+    "id": "project.harness-test",
+    "name": "Harness Test"
+  },
+  "version": 5
+}

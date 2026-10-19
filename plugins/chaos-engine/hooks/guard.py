@@ -1,0 +1,1279 @@
+#!/usr/bin/env python3
+"""Activate ChaosEngine and reject catastrophic shell scope."""
+
+from __future__ import annotations
+
+import contextlib
+
+import json
+import os
+import hashlib
+import importlib.util
+import posixpath
+import re
+import shutil
+import subprocess  # nosec B404 - fixed git argv for toplevel.
+import shlex
+import sys
+from collections.abc import Mapping
+from pathlib import Path
+
+def _load_sibling(module_name: str):
+    path = Path(__file__).resolve().with_name(f"{module_name}.py")
+    if not path.is_file():
+        return None
+    specification = importlib.util.spec_from_file_location(f"chaos_engine_{module_name}", path)
+    if specification is None or specification.loader is None:
+        raise RuntimeError(f"ChaosEngine {module_name} module is unavailable")
+    module = importlib.util.module_from_spec(specification)
+    previous = sys.modules.get(specification.name)
+    sys.modules[specification.name] = module
+    try:
+        specification.loader.exec_module(module)
+    except (Exception, KeyboardInterrupt, SystemExit):
+        if previous is None:
+            sys.modules.pop(specification.name, None)
+        else:
+            sys.modules[specification.name] = previous
+        raise
+    return module
+
+
+_lifecycle = _load_sibling("lifecycle")
+if _lifecycle is None:
+    raise RuntimeError("ChaosEngine lifecycle core is unavailable")
+_kernel = _load_sibling("kernel")
+if _kernel is None:
+    raise RuntimeError("ChaosEngine policy kernel is unavailable")
+justification = _load_sibling("retrieve_justification")
+reflection = _load_sibling("reflection")
+if reflection is None:  # Repository adapter fallback for a source-only layout.
+    repository_root = Path(__file__).resolve().parents[2]
+    sys.path.insert(0, str(repository_root))
+    from scripts.agents import reflection
+
+
+def _learning_session_controller():
+    repository_root = Path(__file__).resolve().parents[2]
+    candidate = repository_root / "scripts" / "agents" / "learning_session.py"
+    if not candidate.is_file():
+        return None
+    if str(repository_root) not in sys.path:
+        sys.path.insert(0, str(repository_root))
+    try:
+        from scripts.agents import learning_session
+    except (ImportError, OSError, AttributeError):
+        return None
+    return learning_session
+
+
+def _portable_learning_completion(session_id: str) -> dict | None:
+    """Load portable `.chaos-engine-state/learning-session/` completion (#5625)."""
+    if not isinstance(session_id, str) or not session_id.strip():
+        return None
+    safe = session_id.strip()[:64]
+    for root in (Path.cwd(), Path(__file__).resolve().parents[2]):
+        path = root / ".chaos-engine-state" / "learning-session" / f"{safe}.completion.json"
+        if not path.is_file():
+            continue
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError, UnicodeError):
+            continue
+        if isinstance(value, dict) and value.get("kind") == "learning-session-portable-finalize":
+            return value
+    return None
+
+
+def learning_completion_artifact(session_id: str) -> dict | None:
+    """Return the immutable Learning Session completion for hooks, if present."""
+    portable = _portable_learning_completion(session_id)
+    if portable is not None:
+        return portable
+    controller = _learning_session_controller()
+    if controller is None or not isinstance(session_id, str) or not session_id.strip():
+        return None
+    state = controller.default_state_dir()
+    completed = controller.load_session_completion(state, session_id)
+    if completed is not None:
+        return completed
+    return controller.load_runtime_completion(state, session_id)
+
+
+ACTIVATION = "Follow .chaos-engine/skills/chaos-engine/SKILL.md before continuing."
+ROOT_DRIVE = re.compile(r"(?i)(?:^|\s)[a-z]:\\(?:\s|$)")
+ENV_ASSIGNMENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*=")
+SHELLS = {"bash", "sh", "zsh"}
+DOWNLOADERS = {"curl", "fetch", "wget"}
+TERMINAL_LABELS = (
+    "intended versus actual result",
+    "cause of the result",
+    "what to repeat",
+    "what to change",
+    "external proof",
+    "lesson for the next attempt",
+    "bounded retry",
+    "committed next action",
+    "durable carry-forward",
+    "token consumption optimization",
+)
+
+
+
+
+LEARNING_REQUEST = re.compile(r"(?i)\b(?:learning session|self-improve|run a retro(?:spective)?)\b")
+
+
+def learning_requested(event: dict) -> bool:
+    """True when the owner's prompt asks for a Learning Session."""
+    prompt = event.get("prompt") or event.get("user_prompt") or ""
+    return isinstance(prompt, str) and bool(LEARNING_REQUEST.search(prompt))
+
+
+def learning_session_reason(session_id: str, event: dict) -> str | None:
+    # #6739: Learning Session after every final delivery. delivery-complete
+    # alone owes it; the completion artifact pays it (the Learning Session
+    # pull request's own merge lands after that artifact and owes nothing).
+    recorded = reflection.entries(session_id)
+    activities = {
+        item.get("activity")
+        for item in recorded
+        if item.get("kind") == "task-activity"
+    }
+    if "delivery-complete" not in activities:
+        return None
+    if learning_completion_artifact(session_id) is not None:
+        return None
+    return (
+        "Learning Session: delivery is complete, and a Learning Session after "
+        "every final delivery is owed. "
+        "Diff the session lessons against the skills and references; a lesson "
+        "already shipped in this pull request or already in a skill is not new. "
+        "File one spec issue and open ONE pull request (skip-release-notes, "
+        "auto-merge MERGE) for the new lessons, or finalize with nothing durable. "
+        "Do not write them to a local queue or into chat. Product lessons may queue."
+    )
+
+
+def outcome_target(command: str, tool_name: str, explicit: object = None) -> str:
+    if isinstance(explicit, str) and explicit.strip():
+        normalized = re.sub(r"\s+", " ", explicit.strip().casefold())
+        return "logical-" + hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:20]
+    if not command:
+        return tool_name or "unknown"
+    normalized = re.sub(r"\s+", " ", command.strip().casefold())
+    return "command-" + hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:20]
+
+
+def test_command(command: str) -> bool:
+    lowered = command.casefold()
+    return any(
+        marker in lowered
+        for marker in (" -m unittest", "pytest", "mvn test", "mvn verify", "gradle test", "npm test")
+    )
+
+
+def mutation_command(command: str) -> bool:
+    lowered = command.casefold()
+    return bool(
+        re.search(r"\b(?:set-content|add-content|remove-item|new-item|out-file|touch|rm|mv|cp)\b", lowered)
+        or re.search(r"\bgit\s+(?:add|commit|push|merge|rebase|reset|checkout|switch|clean)\b", lowered)
+    )
+
+
+def shell_tokens(command: str) -> list[str]:
+    try:
+        lexer = shlex.shlex(command, posix=True, punctuation_chars=";&|")
+        lexer.whitespace_split = True
+        lexer.commenters = ""
+        return list(lexer)
+    except ValueError:
+        return []
+
+
+def tracker_command(command: str) -> bool:
+    parsed = shell_tokens(command)
+    if not parsed or any(item in {";", "&&", "||", "|", "&"} for item in parsed):
+        return False
+    head, arguments = command_head(parsed)
+    return head == "gh" and arguments[:2] in (["issue", "comment"], ["issue", "edit"])
+
+
+def git_commit_command(command: str) -> bool:
+    """True for one git commit, not a combined shell that hides the commit."""
+    parsed = shell_tokens(command)
+    if not parsed or any(item in {";", "&&", "||", "|", "&"} for item in parsed):
+        return False
+    head, arguments = command_head(parsed)
+    return head == "git" and bool(arguments) and arguments[0] == "commit"
+
+
+def _read_body_file(value: str) -> str | None:
+    try:
+        return Path(value).read_text(encoding="utf-8")
+    except OSError:
+        return None
+
+
+def _pr_body_argument(arguments: list[str]) -> str | None:
+    """Body text of ``gh pr create|edit`` arguments; None when absent or unreadable."""
+    body = None
+    for index, item in enumerate(arguments):
+        flag, _, inline = item.partition("=")
+        value = inline if inline else (arguments[index + 1] if index + 1 < len(arguments) else None)
+        if value is None:
+            continue
+        if flag in {"--body-file", "-F"}:
+            body = _read_body_file(value)
+        elif flag in {"--body", "-b"}:
+            body = value
+    return body
+
+
+def _assumption_errors(body: str) -> list[str]:
+    mindset = Path(__file__).resolve().parents[1] / "harness_mindset.py"
+    spec = importlib.util.spec_from_file_location("chaos_engine_pr_body_mindset", mindset)
+    if not mindset.is_file() or spec is None or spec.loader is None:
+        return []
+    module = importlib.util.module_from_spec(spec)
+    try:
+        spec.loader.exec_module(module)
+        # The guard runs only in agent sessions, so this body is agentic by definition:
+        # it must carry the marker, which is what makes CI apply the plan checks.
+        marker = [] if module.is_agentic(body) else [
+            f"agent PR body is missing the `{module.AGENTIC_MARKER}` marker (it identifies agentic PRs)"
+        ]
+        return list(module.assumption_section_errors(body)) + marker + list(
+            module.plan_receipt_errors(body + "\n" + module.AGENTIC_MARKER))
+    except Exception:  # nosec B110 - an unavailable checker must not block PR creation.
+        return []
+
+
+def _pr_body_block(commands: tuple[str, ...]) -> str:
+    """Check a ``gh pr create|edit`` body for the riskiest-assumption section before it ships.
+
+    CI's PR Body guard rejects a missing or link-free section, and a rerun keeps the
+    old event body, so a fix then costs a push and a full CI round trip.
+    """
+    for command in commands:
+        head, arguments = command_head(shell_tokens(command))
+        if head != "gh" or arguments[:2] not in (["pr", "create"], ["pr", "edit"]):
+            continue
+        body = _pr_body_argument(arguments)
+        errors = _assumption_errors(body) if body is not None else []
+        if errors:
+            return (
+                "PR body would fail the CI PR Body guard: " + errors[0] + ". It needs `## Riskiest assumption` "
+                "(one targeted test in backticks, or N/A), `## Plan`, "
+                "`retrieve: [store] used|skipped(<reason>)` lines, and `<!-- chaos-engine:agentic -->`; then rerun."
+            )
+    return ""
+
+
+def _overlay_push_block(commands: tuple[str, ...]) -> str:
+    if not any(re.search(r"\bgit\s+push\b", command) for command in commands):
+        return ""
+    project = Path.cwd()
+    git = shutil.which("git")
+    if git is not None:
+        try:
+            completed = subprocess.run(  # nosec B603 - absolute git from which, fixed argv.
+                [git, "rev-parse", "--show-toplevel"],
+                cwd=project,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if completed.returncode == 0 and completed.stdout.strip():
+                project = Path(completed.stdout.strip())
+        except OSError:
+            pass
+    script = project / "scripts/ci/overlay_pre_push.py"
+    if not script.is_file():
+        return ""
+    spec = importlib.util.spec_from_file_location("chaos_engine_overlay_pre_push", script)
+    if spec is None or spec.loader is None:
+        return "overlay pre-push contract failed: checker unavailable"
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    try:
+        failures = module.overlay_pre_push_failures(project)
+    except Exception as error:
+        # A checker crash is a contract failure. Leaving it uncaught makes the
+        # hook protocol report invalid JSON, and the same push is retried.
+        detail = str(error).strip().splitlines()[0] if str(error).strip() else type(error).__name__
+        return "overlay pre-push contract failed: " + type(error).__name__ + ": " + detail
+    if not failures:
+        return ""
+    return "overlay pre-push contract failed: " + str(failures[0])
+
+
+def delivery_command(command: str) -> bool:
+    parsed = shell_tokens(command)
+    if not parsed or any(item in {";", "&&", "||", "|", "&"} for item in parsed):
+        return False
+    head, arguments = command_head(parsed)
+    if head == "git" and arguments[:1] == ["push"]:
+        return True
+    if head != "gh" or len(arguments) < 2:
+        return False
+    return arguments[0] in {"pr", "issue"} and arguments[1] in {
+        "create", "edit", "merge", "comment", "review", "ready", "close", "reopen"
+    }
+
+
+def terminal_delivery_command(command: str) -> bool:
+    """True only for canonical final delivery-status verification."""
+    return "delivery-status" in shell_tokens(command)
+
+
+def pull_request_open_command(command: str) -> bool:
+    """True for opening a pull request, which owes a watch until merge."""
+    parsed = shell_tokens(command)
+    if not parsed or any(item in {";", "&&", "||", "|", "&"} for item in parsed):
+        return False
+    head, arguments = command_head(parsed)
+    return head == "gh" and arguments[:2] == ["pr", "create"]
+
+
+def pull_request_merged_command(command: str) -> bool:
+    """True for gh pr merge, not for delivery-status."""
+    return confirmed_delivery_command(command) and not terminal_delivery_command(command)
+
+
+def _enables_auto_merge(arguments: list[str]) -> bool:
+    """True when ``gh pr merge --auto`` only arms merge and leaves the PR open.
+
+    ``--auto=false`` is an immediate merge. Exit 0 on an arm is not delivery.
+    """
+    for arg in arguments:
+        if arg == "--auto":
+            return True
+        if arg.startswith("--auto="):
+            return arg.split("=", 1)[1].casefold() not in {"false", "0", "no"}
+    return False
+
+
+def confirmed_delivery_command(command: str) -> bool:
+    """True for merge delivery that completes a PR without waiting on delivery-status.
+
+    Intermediate pushes, draft PR create/edit, and ``gh pr merge --auto`` stay
+    off this path so Learning Session never starts while the pull request is
+    open. A successful ``gh pr merge`` without ``--auto`` is confirmed delivery
+    even when chaos-engine files were untouched.
+    """
+    if terminal_delivery_command(command):
+        return True
+    parsed = shell_tokens(command)
+    if not parsed or any(item in {";", "&&", "||", "|", "&"} for item in parsed):
+        return False
+    head, arguments = command_head(parsed)
+    if head != "gh" or len(arguments) < 2:
+        return False
+    if arguments[0] != "pr" or arguments[1] != "merge":
+        return False
+    return not _enables_auto_merge(arguments)
+
+
+def learning_session_finalize_command(command: str) -> bool:
+    """True only for one direct terminal Learning Session finalizer."""
+    parsed = shell_tokens(command)
+    if not parsed or any(item in {";", "&&", "||", "|", "&"} for item in parsed):
+        return False
+    head, arguments = command_head(parsed)
+    if head not in {"py", "python", "python3"}:
+        return False
+    while arguments and arguments[0] in {"-3", "-u", "-B"}:
+        arguments = arguments[1:]
+    if len(arguments) < 4:
+        return False
+    script = arguments[0].replace("\\", "/").casefold()
+    portable = (
+        script.endswith("scripts/agents/learning_session.py")
+        or script.endswith("chaos-engine/learning_session.py")
+        or script.endswith(".chaos-engine/learning_session.py")
+        or script.endswith("/learning_session.py")
+        and ("chaos-engine" in script or "scripts/agents" in script)
+    )
+    return bool(
+        portable
+        and arguments[1] in {"finalize", "finalize-runtime"}
+        and "--session-id" in arguments[2:]
+    )
+
+
+def read_only_diagnostic_command(command: str) -> bool:
+    parsed = shell_tokens(command)
+    if not parsed or any(item in {";", "&&", "||", "|", "&"} for item in parsed):
+        return False
+    head, arguments = command_head(parsed)
+    if head in {"rg", "grep", "get-content"}:
+        return True
+    if head != "git" or not arguments:
+        return False
+    if arguments[0] in {"status", "diff", "show", "log", "rev-parse"}:
+        return True
+    return arguments == ["branch", "--show-current"]
+
+
+def checkpoint_reason(checkpoint: dict, session_id: str = "<session-id>") -> str:
+    return reflection.recovery_message(_reflection_controller(), session_id, checkpoint)
+
+
+def _reflection_controller() -> Path:
+    return Path(__file__).resolve().with_name("reflection.py")
+
+
+def _loads_same_reflection_controller(path: Path) -> bool:
+    """True for the installed controller or an adapter that loads that file."""
+    try:
+        resolved = path.resolve()
+    except OSError:
+        return False
+    controller = _reflection_controller()
+    if resolved == controller:
+        return True
+    if resolved.name != "reflection.py":
+        return False
+    try:
+        text = resolved.read_text(encoding="utf-8").replace("\\", "/")
+    except OSError:
+        return False
+    return "chaos-engine/hooks/reflection.py" in text or ".chaos-engine/hooks/reflection.py" in text
+
+
+def _reflection_invocation(command: str) -> tuple[Path, str] | None:
+    arguments = shell_tokens(command)
+    if not arguments or any(item in {";", "&&", "||", "|", "&"} for item in arguments):
+        return None
+    head, remaining = command_head(arguments)
+    if head not in {"py", "python", "python3"}:
+        return None
+    script_index = 0
+    while script_index < len(remaining) and remaining[script_index] in {"-3", "-u", "-B"}:
+        script_index += 1
+    if script_index + 1 >= len(remaining):
+        return None
+    supplied = Path(remaining[script_index])
+    if not supplied.is_absolute():
+        supplied = Path.cwd() / supplied
+    operation = remaining[script_index + 1]
+    if operation not in {"receipt", "trigger", "non-attempt"} or "--session-id" not in remaining:
+        return None
+    return supplied, operation
+
+
+def reflection_recovery(command: str) -> str | None:
+    invocation = _reflection_invocation(command)
+    if invocation is None:
+        return None
+    supplied, operation = invocation
+    if not _loads_same_reflection_controller(supplied):
+        return None
+    return operation
+
+
+def denied_reflection_retry(command: str) -> bool:
+    """A reflection CLI attempt whose script is not the installed controller."""
+    invocation = _reflection_invocation(command)
+    return invocation is not None and reflection_recovery(command) is None
+
+
+def tokens(command: str) -> list[str]:
+    try:
+        return shlex.split(command, posix=True)
+    except ValueError:
+        return []
+
+
+def command_head(arguments: list[str]) -> tuple[str, list[str]]:
+    index = 0
+    while index < len(arguments):
+        item = arguments[index]
+        if ENV_ASSIGNMENT.match(item):
+            index += 1
+            continue
+        head = re.split(r"[/\\]", item.strip("\"'"))[-1].casefold()
+        if head in {"command", "env", "sudo", "timeout"}:
+            index += 1
+            while index < len(arguments) and (
+                arguments[index].startswith("-") or ENV_ASSIGNMENT.match(arguments[index])
+            ):
+                index += 1
+            if head == "timeout" and index < len(arguments) and re.fullmatch(
+                r"\d+[smhd]?", arguments[index]
+            ):
+                index += 1
+            continue
+        return head, arguments[index + 1 :]
+    return "", []
+
+
+def catastrophic_target(target: str) -> bool:
+    normalized = posixpath.normpath(re.sub(r"/+", "/", target.replace("\\", "/")))
+    if normalized in {"/", "/*", "~", "$home", "${home}"}:
+        return True
+    return bool(re.fullmatch(r"/(?:bin|boot|dev|etc|lib|sbin|usr|var)(?:/\*)?", normalized))
+
+
+def broad_rm(command: str) -> bool:
+    head, arguments = command_head(tokens(command))
+    if head != "rm":
+        return False
+    recursive = False
+    targets: list[str] = []
+    for argument in arguments:
+        lowered = argument.casefold()
+        if lowered == "--recursive":
+            recursive = True
+        elif lowered.startswith("-") and not lowered.startswith("--"):
+            recursive = recursive or "r" in lowered
+        else:
+            targets.append(lowered)
+    return recursive and any(catastrophic_target(target) for target in targets)
+
+
+def catastrophic_posix(command: str) -> bool:
+    if any(
+        command_head(tokens(stage))[0] in DOWNLOADERS
+        and any(command_head(tokens(later))[0] in SHELLS for later in pipeline[index + 1 :])
+        for pipeline in (re.split(r"(?<!\|)\|(?!\|)", statement) for statement in re.split(r"&&|\|\||;|\r?\n", command))
+        for index, stage in enumerate(pipeline)
+    ):
+        return True
+    for segment in re.split(r"&&|\|\||;|\r?\n", command):
+        head, arguments = command_head(tokens(segment))
+        if head == "rm" and broad_rm(segment):
+            return True
+        if head == "find" and arguments and catastrophic_target(arguments[0]) and (
+            "-delete" in arguments or "-exec" in arguments
+        ):
+            return True
+        if head == "dd" and any(re.fullmatch(r"of=/dev/(?:disk|hd|mmcblk|nvme|sd|vd|xvd).+", item) for item in arguments):
+            return True
+        if re.fullmatch(r"mkfs(?:\.[a-z0-9]+)?", head) and any(item.startswith("/dev/") for item in arguments):
+            return True
+        if head == "chmod":
+            values = [item for item in arguments if not item.startswith("-")]
+            if len(values) >= 2 and re.fullmatch(r"[0-7]*777[0-7]*", values[0]) and catastrophic_target(values[1]):
+                return True
+    return bool(re.search(r": ?\(\)\s*\{", command))
+
+
+def wrapped_exec_commands(source: str) -> tuple[str, ...]:
+    commands: list[str] = []
+    for match in re.finditer(
+        r'''\btools\.exec_command\s*\(\s*\{.*?\b(?:cmd|command)\s*:\s*(?P<literal>"(?:\\.|[^"\\])*")''',
+        source,
+        re.DOTALL,
+    ):
+        try:
+            command = json.loads(match.group("literal"))
+        except (json.JSONDecodeError, ValueError):
+            continue
+        if isinstance(command, str) and command:
+            commands.append(command)
+    return tuple(commands)
+
+
+def wrapped_exec_call_count(source: str) -> int:
+    return len(re.findall(r"\btools\.exec_command\s*\(", source))
+
+
+def functions_exec_source(tool_input: object) -> str:
+    if isinstance(tool_input, str):
+        return tool_input
+    if isinstance(tool_input, dict):
+        for key in ("input", "source", "code"):
+            source = tool_input.get(key)
+            if isinstance(source, str):
+                return source
+    return ""
+
+
+def functions_exec_direct_command(tool_input: object) -> str:
+    if isinstance(tool_input, dict):
+        command = tool_input.get("cmd") or tool_input.get("command")
+        if isinstance(command, str):
+            return command
+    return ""
+
+
+def _event_commands(tool_name: str, tool_input: object) -> tuple[str, ...]:
+    functions_source = functions_exec_source(tool_input)
+    functions_direct = functions_exec_direct_command(tool_input)
+    if tool_name == "functions.exec" and functions_direct:
+        return (functions_direct,)
+    if tool_name == "functions.exec" and functions_source:
+        return wrapped_exec_commands(functions_source)
+    if not isinstance(tool_input, dict):
+        return ()
+    command = str(tool_input.get("command") or tool_input.get("cmd") or "")
+    return (command,) if command else ()
+
+
+def _tool_result_failed(event_name: str, result: object) -> bool:
+    if event_name == "PostToolUseFailure":
+        return True
+    return bool(
+        isinstance(result, dict)
+        and (
+            result.get("isError") is True
+            or result.get("interrupted") is True
+            or str(result.get("status", "")).casefold() in {"error", "failed", "failure"}
+            or result.get("exit_code", result.get("exitCode", 0)) not in {0, None}
+        )
+    )
+
+
+def _command_is_destructive(command: str) -> bool:
+    folded = command.casefold()
+    broad_remove = (
+        "remove-item" in folded
+        and "-recurse" in folded
+        and (ROOT_DRIVE.search(command) is not None or "$home" in folded or "~" in command)
+    )
+    return catastrophic_posix(command) or "git reset --hard" in folded or broad_remove
+
+
+STASH_READ_ONLY = frozenset({"list", "show"})
+GIT_OPTIONS_WITH_VALUE = frozenset({"-c", "-C", "--git-dir", "--work-tree", "--namespace"})
+STASH_R8_REASON = (
+    "R8 (#6223): `git stash{sub}` mutates the stash list in the shared .git, which this "
+    "checkout shares with its linked worktrees, so another session can pop or drop it. "
+    "Commit to your own branch instead (`git add -A && git commit -m wip`, amend or reset "
+    "later), and take baselines from a separate `git worktree add --detach <dir> <base-ref>`. "
+    "Read-only `git stash list` / `git stash show` stay allowed."
+)
+
+
+def _stash_invocation(command: str) -> tuple[bool, str, str]:
+    """Return (mutating stash, subcommand, -C directory) for one shell segment."""
+    head, arguments = command_head(tokens(command))
+    if head not in {"git", "git.exe"}:
+        return False, "", ""
+    directory = ""
+    index = 0
+    while index < len(arguments) and arguments[index].startswith("-"):
+        option = arguments[index]
+        if option in GIT_OPTIONS_WITH_VALUE and index + 1 < len(arguments):
+            if option == "-C":
+                directory = arguments[index + 1]
+            index += 2
+            continue
+        index += 1
+    if index >= len(arguments) or arguments[index] != "stash":
+        return False, "", ""
+    rest = [item for item in arguments[index + 1 :] if not item.startswith("-")]
+    subcommand = rest[0].casefold() if rest else ""
+    return subcommand not in STASH_READ_ONLY, subcommand, directory
+
+
+def shares_git_directory(cwd: Path) -> bool:
+    """True inside a linked worktree, or a main checkout that has linked worktrees."""
+    for candidate in (cwd, *cwd.parents):
+        marker = candidate / ".git"
+        if marker.is_file():
+            try:
+                return "/worktrees/" in marker.read_text(encoding="utf-8").replace("\\", "/")
+            except OSError:
+                return False
+        if marker.is_dir():
+            worktrees = marker / "worktrees"
+            return worktrees.is_dir() and any(worktrees.iterdir())
+    return False
+
+
+def linked_worktree_stash_reason(commands: tuple[str, ...], cwd: Path) -> str:
+    for command in commands:
+        for segment in re.split(r"&&|\|\||;|\||\r?\n", command):
+            mutating, subcommand, directory = _stash_invocation(segment)
+            if not mutating:
+                continue
+            target = (cwd / directory) if directory else cwd
+            if shares_git_directory(target.resolve()):
+                return STASH_R8_REASON.format(sub=f" {subcommand}" if subcommand else "")
+    return ""
+
+
+def _terminal_reflection_reason(event: dict, session_id: str) -> str:
+    """Ask once for the ten-part reflection, then record acceptance and stay quiet."""
+    elapsed = reflection.session_elapsed_seconds(session_id)
+    if elapsed is None or elapsed <= 3600 or reflection.has_valid_terminal_receipt(session_id):
+        return ""
+    message = str(event.get("last_assistant_message") or event.get("lastAssistantMessage") or "").casefold()
+    missing = [label for label in TERMINAL_LABELS if label not in message]
+    if not missing:
+        reflection.accept_terminal_reflection(session_id)
+        return ""
+    # A host sets stop_hook_active on the retry of a blocked stop. Demanding
+    # again there loops. The session still asks on a later stop that is not a retry.
+    if bool(event.get("stop_hook_active") or event.get("stopHookActive")):
+        return ""
+    return (
+        "Terminal reflection required once this session. Include "
+        + ", ".join(missing)
+        + ". Do not repeat it after later tool calls."
+    )
+
+
+_PULL_REQUEST_URL = re.compile(r"/pull/(\d+)\b")
+
+
+def _open_pull_request_state_path(cwd: Path) -> Path:
+    return cwd / ".chaos-engine-state" / "open-pull-request.json"
+
+
+def _pull_request_number(event: dict, commands: tuple[str, ...]) -> int | None:
+    response = event.get("tool_response") or event.get("toolResponse") or {}
+    chunks: list[str] = []
+    if isinstance(response, dict):
+        chunks.extend(str(response.get(key) or "") for key in ("stdout", "output", "body"))
+    elif isinstance(response, str):
+        chunks.append(response)
+    chunks.extend(commands)
+    for chunk in chunks:
+        match = _PULL_REQUEST_URL.search(chunk)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def remember_open_pull_request(cwd: Path, number: int | None) -> None:
+    """Persist a pull request opened by gh pr create for later sessions."""
+    payload: dict[str, object] = {"active": True, "state": "open"}
+    if number is not None:
+        payload["pullRequest"] = number
+    path = _open_pull_request_state_path(cwd)
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+    except OSError:
+        return
+
+
+def clear_open_pull_request(cwd: Path) -> None:
+    """Drop the checkout open-PR mark after gh pr merge."""
+    path = _open_pull_request_state_path(cwd)
+    try:
+        path.unlink(missing_ok=True)
+    except OSError:
+        return
+
+
+def delivery_goal_open_pull_request(event: dict) -> bool:
+    """True when this checkout still has a pull request opened by gh pr create.
+
+    The session ledger is not required to contain ``pull-request-open``.
+    A later push-only session still owes a babysit while that mark is open.
+    """
+    cwd = event.get("cwd")
+    if not cwd:
+        return False
+    path = _open_pull_request_state_path(Path(str(cwd)))
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return False
+    if not isinstance(payload, dict) or payload.get("active") is not True:
+        return False
+    if str(payload.get("state") or "").casefold() != "open":
+        return False
+    number = payload.get("pullRequest")
+    return number is None or (isinstance(number, int) and not isinstance(number, bool) and number > 0)
+
+
+def _open_pull_request_reason(session_id: str, event: dict) -> str:
+    """An open delivery PR is unfinished until gh pr merge is recorded.
+
+    ``delivery-status`` does not clear the block. An active delivery goal
+    with an open pull request counts even when this session never ran
+    ``gh pr create``.
+    """
+    activities = {
+        item.get("activity")
+        for item in reflection.entries(session_id)
+        if item.get("kind") == "task-activity"
+    }
+    if "pull-request-merged" in activities:
+        return ""
+    if "pull-request-open" not in activities and not delivery_goal_open_pull_request(event):
+        return ""
+    return (
+        "Delivery is not complete while the pull request is open. "
+        "Babysit it until merged: classify the release note, arm "
+        "gh pr merge --auto --merge, and watch with "
+        "scripts/agents/watch_pr_checks.py --until-merged. "
+        "Do not stop on an open pull request."
+    )
+
+
+def _stop_block_reason(event: dict, session_id: str) -> str:
+    # An open delivery PR outranks Learning Session and the host stop retry.
+    # Otherwise the turn ends when the PR is only opened.
+    if event.get("hook_event_name") != "SubagentStop":
+        open_reason = _open_pull_request_reason(session_id, event)
+        if open_reason:
+            return open_reason
+    # Learning Session outranks a retrieve citation. Otherwise a delivery-complete
+    # Stop ends on the retrieve command and the host retry never asks again.
+    if event.get("hook_event_name") != "SubagentStop":
+        loop_reason = learning_session_reason(session_id, event)
+        if loop_reason:
+            return loop_reason
+    if justification is not None and event.get("hook_event_name") != "SubagentStop":
+        root = justification.project_root(Path(str(event.get("cwd") or Path.cwd())))
+        gap = justification.session_retrieve_gap(root, session_id)
+        if gap:
+            return gap
+    if event.get("hook_event_name") == "SubagentStop":
+        return ""
+    reflection_reason = _terminal_reflection_reason(event, session_id)
+    if reflection_reason:
+        return reflection_reason
+    if bool(event.get("stop_hook_active") or event.get("stopHookActive")):
+        return ""
+    return _pending_watch_claim_reason(event)
+
+
+def _record_failed_result(
+    event: dict, event_name: str, commands: tuple[str, ...], tool_name: str, session_id: str
+) -> bool:
+    result = event.get("tool_response", event.get("tool_result"))
+    if event_name not in {"PostToolUse", "PostToolUseFailure"} or not _tool_result_failed(event_name, result):
+        return False
+    target = outcome_target(
+        commands[0] if commands else "",
+        tool_name,
+        event.get("target") or event.get("job") or event.get("test"),
+    )
+    read_only = tool_name in {"Read", "Grep", "Glob", "WebSearch", "WebFetch", "Skill"} or bool(
+        commands and all(read_only_diagnostic_command(command) for command in commands)
+    )
+    # A denied receipt adapter must not enlarge the fingerprint set the next receipt has to list.
+    if commands and any(denied_reflection_retry(command) for command in commands):
+        return False
+    reflection.record_failure(
+        session_id,
+        phase="tool-outcome",
+        target=target,
+        failure_class="interrupted" if event.get("is_interrupt") else "tool-failure",
+        platform=event.get("platform") or sys.platform,
+        attempted=not read_only,
+        observation_id=event.get("tool_use_id") or event.get("toolUseId"),
+    )
+    _soft_significance_capture(
+        event, event_name, failed=True, denied=False, tool_name=tool_name
+    )
+    checkpoint = reflection.pending_checkpoint(session_id)
+    if checkpoint:
+        print(json.dumps({"additionalContext": checkpoint_reason(checkpoint, session_id)}))
+    return bool(checkpoint)
+
+
+def _unchanged_test_requested(event: dict, commands: tuple[str, ...], tool_name: str, session_id: str) -> bool:
+    active_targets = {
+        item.get("target")
+        for item in reflection.active_entries(session_id)
+        if item.get("kind") == "task-failure"
+    }
+    target = event.get("target") or event.get("job") or event.get("test")
+    return any(
+        test_command(candidate) and outcome_target(candidate, tool_name, target) in active_targets
+        for candidate in commands
+    )
+
+
+def _uninspectable_functions_call(
+    tool_name: str, tool_input: object, functions_source: str,
+    functions_direct: str, commands: tuple[str, ...],
+) -> bool:
+    return bool(
+        tool_name == "functions.exec"
+        and not functions_direct
+        and (
+            not isinstance(tool_input, (str, dict))
+            or (isinstance(tool_input, dict) and not functions_source)
+            or wrapped_exec_call_count(functions_source) != len(commands)
+        )
+    )
+
+
+def _command_guard_state(
+    event: dict, event_name: str, commands: tuple[str, ...], tool_name: str, tool_input: object,
+    functions_source: str, functions_direct: str, session_id: str,
+) -> tuple[bool, bool, str]:
+    receipt_command = any(reflection_recovery(candidate) for candidate in commands)
+    mutation = (
+        tool_name in {"Write", "Edit", "apply_patch"}
+        or bool(re.search(r"\btools\.(?:apply_patch|store)\s*\(", functions_source))
+        or any(
+        mutation_command(candidate) and not tracker_command(candidate) for candidate in commands
+        )
+    )
+    checkpoint = reflection.pending_checkpoint(session_id)
+    unchanged_test = _unchanged_test_requested(event, commands, tool_name, session_id)
+    push_block = (_overlay_push_block(commands) or _pr_body_block(commands)) if event_name == "PreToolUse" else ""
+    if push_block:
+        return receipt_command, mutation, push_block
+    if event_name == "PreToolUse" and checkpoint and not receipt_command and (mutation or unchanged_test):
+        return receipt_command, mutation, checkpoint_reason(checkpoint, session_id)
+    uninspectable = _uninspectable_functions_call(
+        tool_name, tool_input, functions_source, functions_direct, commands
+    )
+    if uninspectable or any(_command_is_destructive(candidate) for candidate in commands):
+        return receipt_command, mutation, "ChaosEngine rejected destructive broad scope."
+    return receipt_command, mutation, ""
+
+
+def _pending_watch_claim_reason(event: dict) -> str:
+    module = _unattended_delivery()
+    if module is None:
+        return ""
+    checkpoint = module.checkpoint_from_event(event)
+    if checkpoint is None:
+        return ""
+    message = str(event.get("last_assistant_message") or event.get("lastAssistantMessage") or "")
+    follow_up_open = bool(checkpoint.get("followUpOpen", True))
+    if not module.delivery_claim_rejected(message, follow_up_open=follow_up_open):
+        return ""
+    return (
+        "Delivery is not complete while the watch is pending. "
+        "Wait on that same task id until MERGED or RED."
+    )
+
+
+def _unattended_delivery():
+    root = Path(__file__).resolve().parents[2]
+    path = root / "scripts/agents/unattended_delivery.py"
+    if not path.is_file():
+        return None
+    spec = importlib.util.spec_from_file_location("chaos_engine_unattended_delivery", path)
+    if spec is None or spec.loader is None:
+        return None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _schedule_store_refresh(cwd: Path) -> None:
+    """Spawn a detached store refresh when the shared cache is stale. Never blocks."""
+    try:
+        import runpy
+
+        stores = runpy.run_path(
+            str(Path(__file__).resolve().parents[1] / "stores.py"),
+            run_name="_chaos_engine_guard_stores",
+        )
+        stores["maybe_spawn_refresh"](cwd)
+    except (OSError, RuntimeError, ValueError, KeyError):
+        return
+
+
+def _phase_ledger_triage(session_id: str) -> str | None:
+    """Read triage from zero-LLM phase ledger when present (#5623)."""
+    if not session_id:
+        return None
+    try:
+        path = Path(__file__).resolve().parents[1] / "phase_ledger.py"
+        if not path.is_file():
+            return None
+        spec = importlib.util.spec_from_file_location("chaos_engine_phase_ledger", path)
+        if spec is None or spec.loader is None:
+            return None
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module.session_triage(session_id)
+    except (OSError, RuntimeError, ValueError, AttributeError):
+        return None
+
+
+def _research_before_mutation_reason(event_name: str, mutation: bool, session_id: str) -> str | None:
+    """Triage-scaled research gate (#5623); hard for public-contract, soft for one-file."""
+    if event_name != "PreToolUse" or not mutation:
+        return None
+    triage = _phase_ledger_triage(session_id)
+    flag = str(os.environ.get("CHAOS_ENGINE_ENFORCE_RESEARCH_RECEIPT") or "").strip().casefold()
+    env_on = flag in {"1", "true", "yes", "on"}
+    hard = triage == "public-contract" or (env_on and triage != "one-file")
+    if not hard:
+        return None
+    if not session_id or reflection.has_research_preflight(session_id):
+        return None
+    return (
+        "Research receipt required before mutation "
+        f"(triage={triage or 'unset'}; "
+        "record via hooks/reflection.py research-preflight "
+        "or phase_ledger.py record --phase research)."
+    )
+
+
+
+def _soft_significance_capture(
+    event: dict,
+    event_name: str,
+    *,
+    failed: bool = False,
+    denied: bool = False,
+    tool_name: str = "",
+) -> None:
+    """Soft fail/deny marks only — never load self-improve refs mid-turn (#5658)."""
+    with contextlib.suppress(Exception):
+        sig_path = Path(__file__).resolve().parents[1] / "significance.py"
+        if not sig_path.is_file():
+            return
+        spec = importlib.util.spec_from_file_location("ce_significance_soft", sig_path)
+        if spec is None or spec.loader is None:
+            return
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        mod.soft_post_tool_capture(
+            event if isinstance(event, dict) else {},
+            event_name=event_name,
+            failed=failed,
+            denied=denied,
+            tool_name=tool_name,
+        )
+
+
+def _record_denial_counter() -> None:
+    with contextlib.suppress(Exception):
+        counters_path = Path(__file__).resolve().parents[1] / "learning_counters.py"
+        if not counters_path.is_file():
+            return
+        spec = importlib.util.spec_from_file_location("ce_learning_counters_deny", counters_path)
+        if spec is None or spec.loader is None:
+            return
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        mod.record_denial()
+
+
+
+
+def _record_denial_with_significance(event: dict, event_name: str, tool_name: str = "") -> None:
+    _record_denial_counter()
+    _soft_significance_capture(
+        event, event_name, failed=False, denied=True, tool_name=tool_name
+    )
+
+
+# Soft complexity reminder for hot-spot mutations. Profiles declare the
+# hot-spot markers in their profile.json `complexityHint`; the core ships none.
+def _complexity_hint_markers() -> tuple[tuple[str, ...], tuple[str, ...]]:
+    paths: list[str] = []
+    names: list[str] = []
+    tree = Path(__file__).resolve().parents[1]
+    declared = [*tree.glob("profiles/*/profile.json"), *tree.glob("packs/*/profile.json")]
+    declared.extend(tree.parent.glob("*/ce-pack/profile.json"))
+    for profile in sorted(declared):
+        with contextlib.suppress(OSError, ValueError, AttributeError, TypeError):
+            hint = json.loads(profile.read_text(encoding="utf-8")).get("complexityHint") or {}
+            paths.extend(str(item).casefold() for item in hint.get("pathMarkers", ()))
+            names.extend(str(item).casefold() for item in hint.get("nameMarkers", ()))
+    return tuple(paths), tuple(names)
+
+
+COMPLEXITY_GATE_HINT = (
+    "Complexity gate: kind-family helpers / rule tables before "
+    "fat dispatch arms; Complexity ACTION_REQUIRED == unit red. "
+    "Checklist: references/complexity-gate.md"
+)
+
+
+def _mutation_path_blobs(tool_name: str, tool_input: object, commands: tuple[str, ...]) -> str:
+    """Flatten Write/Edit/patch/shell targets for classifier-path matching."""
+    chunks: list[str] = []
+    if isinstance(tool_input, Mapping):
+        for key in ("file_path", "filePath", "path", "notebook_path", "notebookPath"):
+            value = tool_input.get(key)
+            if isinstance(value, str) and value.strip():
+                chunks.append(value)
+        for key in ("old_string", "new_string", "content", "patch", "input", "command", "cmd"):
+            value = tool_input.get(key)
+            if isinstance(value, str) and value.strip():
+                chunks.append(value)
+    elif isinstance(tool_input, str) and tool_input.strip():
+        chunks.append(tool_input)
+    chunks.extend(commands)
+    compact = tool_name.casefold() if tool_name else ""
+    if compact:
+        chunks.append(compact)
+    return "\n".join(chunks).casefold()
+
+
+def classifier_complexity_gate_hint(
+    event_name: str,
+    *,
+    mutation: bool,
+    tool_name: str,
+    tool_input: object,
+    commands: tuple[str, ...] = (),
+) -> str | None:
+    """Return soft checklist hint when mutating classifier / interaction surfaces."""
+    if event_name != "PreToolUse" or not mutation:
+        return None
+    blob = _mutation_path_blobs(tool_name, tool_input, commands)
+    if not blob:
+        return None
+    path_markers, name_markers = _complexity_hint_markers()
+    path_hit = any(marker in blob for marker in path_markers)
+    name_hit = any(marker in blob for marker in name_markers)
+    if path_hit or name_hit:
+        return COMPLEXITY_GATE_HINT
+    return None
+
+
+def _run_event(event: dict, _host: str) -> int:
+    tool_input = event.get("tool_input", {}) if isinstance(event, dict) else {}
+    tool_name = str(event.get("tool_name", "")) if isinstance(event, dict) else ""
+    functions_source = functions_exec_source(tool_input)
+    functions_direct = functions_exec_direct_command(tool_input)
+    commands = _event_commands(tool_name, tool_input)
+    event_name = (
+        str(event.get("hook_event_name") or event.get("hookEventName") or "")
+        if isinstance(event, dict)
+        else ""
+    )
+    if event_name == "PreToolUse":
+        # R8 is session-independent: enforce it before identity or ledger checks.
+        stash_block = linked_worktree_stash_reason(
+            commands, Path(str(event.get("cwd") or Path.cwd()))
+        )
+        if stash_block:
+            _record_denial_with_significance(event, event_name, tool_name)
+            print(json.dumps({"decision": "block", "reason": stash_block}))
+            return 2
+    root_session_id = str(event.get("session_id") or event.get("sessionId") or "")
+    session_id = reflection.scope_session_id(
+        root_session_id, event.get("agent_id") or event.get("agentId")
+    )
+    kernel_event = dict(event)
+    kernel_event["session_id"] = session_id
+    kernel_event["agent_id"] = ""
+    normalized_kernel_event = _kernel.normalize_event(kernel_event, _host)
+    if event_name in {"PostToolUse", "PostToolUseFailure"} and not normalized_kernel_event.target_phase:
+        kernel_report = _kernel.evaluate(normalized_kernel_event)
+    else:
+        kernel_journal = _kernel.EffectJournal(
+            reflection.ledger_path(session_id).with_suffix(".kernel-v3.jsonl")
+        )
+        kernel_report = _kernel.evaluate_session(normalized_kernel_event, kernel_journal)
+    if kernel_report.decision == "deny":
+        _record_denial_with_significance(event, event_name, tool_name)
+        print(json.dumps({"decision": "block", "reason": kernel_report.reason}))
+        return 2
+    if justification is not None:
+        read_reason = justification.file_read_block_reason(
+            project=justification.project_root(Path(str(event.get("cwd") or Path.cwd()))),
+            event_name=str(normalized_kernel_event.name or event_name),
+            tool_name=str(normalized_kernel_event.tool_name or tool_name),
+            tool_input=tool_input if isinstance(tool_input, dict) else {},
+            commands=commands,
+            session_id=session_id,
+        )
+        if read_reason:
+            _record_denial_with_significance(event, event_name, tool_name)
+            print(json.dumps({"decision": "block", "reason": read_reason}))
+            return 2
+    research_reason = _research_before_mutation_reason(
+        event_name,
+        bool(normalized_kernel_event.stateful_mutation),
+        session_id,
+    )
+    if research_reason:
+        _record_denial_with_significance(event, event_name, tool_name)
+        print(json.dumps({"decision": "block", "reason": research_reason}))
+        return 2
+    if event_name == "SessionStart":
+        token = reflection.record_session_start(session_id)
+    else:
+        if event_name not in {"SubagentStop", "SessionEnd"}:
+            reflection.record_session_start(session_id, estimated=True)
+        token = None
+    if event_name == "UserPromptSubmit":
+        prompt = event.get("prompt") or event.get("user_prompt") or ""
+        if isinstance(prompt, str):
+            _lifecycle.record_companion_opt_out(session_id, prompt)
+        if learning_requested(event):
+            reflection.record_activity(session_id, "learning-requested")
+    if _record_failed_result(event, event_name, commands, tool_name, session_id):
+        return 0
+    receipt_command, mutation, guard_reason = _command_guard_state(
+        event, event_name, commands, tool_name, tool_input, functions_source, functions_direct, session_id
+    )
+    if guard_reason:
+        _record_denial_with_significance(event, event_name, tool_name)
+        print(json.dumps({"decision": "block", "reason": guard_reason}))
+        return 2
+    if event_name == "PostToolUse" and not receipt_command:
+        if any(learning_session_finalize_command(candidate) for candidate in commands):
+            if learning_completion_artifact(session_id) is not None:
+                reflection.record_activity(session_id, "learning-session-complete")
+        elif any(confirmed_delivery_command(candidate) for candidate in commands):
+            reflection.record_activity(session_id, "delivery-complete")
+            if any(pull_request_merged_command(candidate) for candidate in commands):
+                reflection.record_activity(session_id, "pull-request-merged")
+                clear_open_pull_request(Path(str(event.get("cwd") or Path.cwd())))
+        elif mutation or any(delivery_command(candidate) for candidate in commands):
+            reflection.record_activity(session_id, "mutation")
+            if any(git_commit_command(candidate) for candidate in commands):
+                reflection.record_activity(session_id, "fix-commit")
+            if any(pull_request_open_command(candidate) for candidate in commands):
+                reflection.record_activity(session_id, "pull-request-open")
+                remember_open_pull_request(
+                    Path(str(event.get("cwd") or Path.cwd())),
+                    _pull_request_number(event, commands),
+                )
+    if event_name in {"Stop", "SubagentStop"}:
+        stop_reason = _stop_block_reason(event, session_id)
+        if stop_reason:
+            _record_denial_with_significance(event, event_name, tool_name)
+            print(json.dumps({"decision": "block", "reason": stop_reason}))
+            return 2
+    if event_name in {"SessionStart", "PreCompact"}:
+        module = _unattended_delivery()
+        checkpoint = module.checkpoint_from_event(event) if module is not None else None
+        if checkpoint is not None:
+            print(json.dumps({"additionalContext": module.resume_prompt(checkpoint)}))
+            return 0
+    if event_name == "SessionStart":
+        _schedule_store_refresh(Path(str(event.get("cwd") or Path.cwd())))
+        context = _lifecycle.session_start_context(token, ACTIVATION, session_id=session_id)
+        drift = reflection.reflection_controller_drift(Path(str(event.get("cwd") or Path.cwd())))
+        if drift:
+            context = f"{context}\n\n{drift}"
+        print(json.dumps({"additionalContext": context}))
+        return 0
+    complexity_hint = classifier_complexity_gate_hint(
+        event_name,
+        mutation=mutation,
+        tool_name=tool_name,
+        tool_input=tool_input,
+        commands=commands,
+    )
+    retrieve_note = None
+    if justification is not None and event_name == "PreToolUse":
+        retrieve_note = justification.broad_search_context(
+            justification.project_root(Path(str(event.get("cwd") or Path.cwd()))),
+            session_id,
+        )
+    notes = [item for item in (retrieve_note, complexity_hint) if item]
+    if notes:
+        print(json.dumps({"additionalContext": "\n".join(notes)}))
+    return 0
+
+
+def main() -> int:
+    callbacks = {event: _run_event for event in _lifecycle.LIFECYCLE_EVENTS}
+    return _lifecycle.run_hook_protocol(
+        sys.stdin.read(),
+        callbacks,
+        normalize=_kernel.normalize_hook_input,
+        host_for_input=_kernel.detect_host,
+        adapt_output=_kernel.adapt_hook_output,
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
