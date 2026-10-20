@@ -79,9 +79,13 @@ neither Allure history nor raw results. Allure uses its existing single-file
 configuration and is generated after native reporters flush.
 The current public QA target and disposable test accounts require no repository secrets.
 
-This executes the 54 automated cases. Story 91 adds TC174–TC180; TC181 remains
-unverified because the required transient loading indicator has not been established.
-Its original expectation is retained in `.harness/sources/ado-story-91.json`.
+This executes the 54 automated cases. Story 91 adds TC174–TC180. TC181 is not
+automated: a review of the application's own scripts and styles and a runtime probe under
+normal and throttled network found no in-page loading indicator on the way to checkout,
+but a transient indicator cannot be observed formally, so the case stays unresolved. Its
+original expectation is retained in `.harness/sources/ado-story-91.json`; the case owner
+decides whether to revise or retire it, including whether a browser-native loading
+indicator would count.
 The fifteen unresolved story 87
 cases remain documented in [the status table](docs/story-87-status.md); they are not
 included as passing automation. TC126 has a known QA behavior mismatch, so a full run
