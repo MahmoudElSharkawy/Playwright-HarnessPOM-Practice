@@ -1,0 +1,45 @@
+{
+  "description": "Neutral project-local agent harness.",
+  "name": "chaos-engine-project",
+  "owner": {
+    "name": "ChaosEngine contributors"
+  },
+  "plugins": [
+    {
+      "description": "Neutral project-local agent harness.",
+      "name": "chaos-engine",
+      "skills": [
+        "./chaos-engine"
+      ],
+      "source": "./plugins/chaos-engine",
+      "version": "1.0.3384342121"
+    },
+    {
+      "description": "Ultra-compressed communication mode.",
+      "name": "caveman",
+      "skills": [
+        "./caveman"
+      ],
+      "source": "./plugins/caveman",
+      "version": "0.1.0"
+    },
+    {
+      "description": "Laziest solution that actually works.",
+      "name": "ponytail",
+      "skills": [
+        "./ponytail"
+      ],
+      "source": "./plugins/ponytail",
+      "version": "0.1.0"
+    },
+    {
+      "description": "ICM workspaces: folder structure as agent architecture.",
+      "name": "icm-architect",
+      "skills": [
+        "./icm-architect"
+      ],
+      "source": "./plugins/icm-architect",
+      "version": "0.1.0"
+    }
+  ]
+}
