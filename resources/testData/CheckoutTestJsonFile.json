@@ -1,0 +1,218 @@
+{
+  "tc174": {
+    "product": "Men Tshirt",
+    "expected": {
+      "searchedHeading": "Searched Products",
+      "registerLogin": "Register / Login",
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!"
+    }
+  },
+  "tc175": {
+    "product": "Men Tshirt",
+    "expected": {
+      "searchedHeading": "Searched Products",
+      "httpStatus": 200,
+      "absentApi": 404,
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "loggedIn": "Logged in as Case Customer",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order"
+    },
+    "emailBase": "ae-tc175",
+    "emailDomain": "example.test",
+    "password": "Checkout-TC175!",
+    "profile": {
+      "name": "Case Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Case",
+      "lastName": "Customer",
+      "company": "Checkout Test",
+      "address": "123 Main St",
+      "address2": "",
+      "country": "United States",
+      "state": "CA",
+      "city": "Anytown",
+      "zip": "90210",
+      "mobile": "2025550100"
+    }
+  },
+  "tc176": {
+    "product": "Men Tshirt",
+    "expected": {
+      "searchedHeading": "Searched Products",
+      "httpStatus": 200,
+      "absentApi": 404,
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "loggedIn": "Logged in as Case Customer",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "address": [
+        "Your delivery address",
+        "Mr. Case Customer",
+        "Checkout Test",
+        "123 Main St",
+        "Anytown CA 90210",
+        "United States",
+        "2025550100"
+      ]
+    },
+    "emailBase": "ae-tc176",
+    "emailDomain": "example.test",
+    "password": "Checkout-TC176!",
+    "profile": {
+      "name": "Case Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Case",
+      "lastName": "Customer",
+      "company": "Checkout Test",
+      "address": "123 Main St",
+      "address2": "",
+      "country": "United States",
+      "state": "CA",
+      "city": "Anytown",
+      "zip": "90210",
+      "mobile": "2025550100"
+    }
+  },
+  "tc177": {
+    "product": "Men Tshirt",
+    "expected": {
+      "searchedHeading": "Searched Products",
+      "httpStatus": 200,
+      "absentApi": 404,
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "loggedIn": "Logged in as Case Customer",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "address": [
+        "Your billing address",
+        "Mr. Case Customer",
+        "Checkout Test",
+        "123 Main St",
+        "Anytown CA 90210",
+        "United States",
+        "2025550100"
+      ]
+    },
+    "emailBase": "ae-tc177",
+    "emailDomain": "example.test",
+    "password": "Checkout-TC177!",
+    "profile": {
+      "name": "Case Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Case",
+      "lastName": "Customer",
+      "company": "Checkout Test",
+      "address": "123 Main St",
+      "address2": "",
+      "country": "United States",
+      "state": "CA",
+      "city": "Anytown",
+      "zip": "90210",
+      "mobile": "2025550100"
+    }
+  },
+  "tc178": {
+    "product": "Men Tshirt",
+    "expected": {
+      "searchedHeading": "Searched Products",
+      "httpStatus": 200,
+      "absentApi": 404,
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "loggedIn": "Logged in as Case Customer",
+      "addressHeading": "Address Details",
+      "orderHeading": "Review Your Order",
+      "paymentHeading": "Payment"
+    },
+    "emailBase": "ae-tc178",
+    "emailDomain": "example.test",
+    "password": "Checkout-TC178!",
+    "profile": {
+      "name": "Case Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Case",
+      "lastName": "Customer",
+      "company": "Checkout Test",
+      "address": "123 Main St",
+      "address2": "",
+      "country": "United States",
+      "state": "CA",
+      "city": "Anytown",
+      "zip": "90210",
+      "mobile": "2025550100"
+    },
+    "comment": "Please deliver after 5 PM."
+  },
+  "tc179": {
+    "product": "Men Tshirt",
+    "expected": {
+      "searchedHeading": "Searched Products",
+      "httpStatus": 200,
+      "absentApi": 404,
+      "createApi": {
+        "status": 200,
+        "responseCode": 201,
+        "message": "User created!"
+      },
+      "loggedIn": "Logged in as Case Customer",
+      "registerLogin": "Register / Login",
+      "loginHeading": "Login to your account",
+      "signupHeading": "New User Signup!",
+      "quantity": "2"
+    },
+    "emailBase": "ae-tc179",
+    "emailDomain": "example.test",
+    "password": "Checkout-TC179!",
+    "profile": {
+      "name": "Case Customer",
+      "title": "Mr",
+      "birthDay": "1",
+      "birthMonth": "1",
+      "birthYear": "1990",
+      "firstName": "Case",
+      "lastName": "Customer",
+      "company": "Checkout Test",
+      "address": "123 Main St",
+      "address2": "",
+      "country": "United States",
+      "state": "CA",
+      "city": "Anytown",
+      "zip": "90210",
+      "mobile": "2025550100"
+    }
+  },
+  "tc180": {
+    "expected": {
+      "emptyCart": "Cart is empty!"
+    }
+  }
+}

@@ -27,12 +27,13 @@ literal credential.
 npx playwright test                                          # full run
 npx playwright test tests/LoginTests.spec.ts                 # single spec
 npx playwright test tests/RegistrationTests.spec.ts          # registration spec
+npx playwright test tests/CheckoutTests.spec.ts              # checkout review spec
 npx playwright test -g "TC116:"                             # filter by test case ID
 npx playwright test --headed                                 # watch the browser
 npx playwright test --project=chromium                       # one browser project
 ```
 
-The suites cover registration, login/logout, product search and category/brand browsing, with 47 cases across four specs.
+The suites cover registration, login/logout, product search, category/brand browsing and checkout review, with 54 cases across five specs.
 
 ## Environment flags
 
@@ -78,7 +79,14 @@ neither Allure history nor raw results. Allure uses its existing single-file
 configuration and is generated after native reporters flush.
 The current public QA target and disposable test accounts require no repository secrets.
 
-This executes the 47 committed automated cases. The fifteen unresolved story 87
+This executes the 54 automated cases. Story 91 adds TC174–TC180. TC181 is not
+automated: a review of the application's own scripts and styles and a runtime probe under
+normal and throttled network found no in-page loading indicator on the way to checkout,
+but a transient indicator cannot be observed formally, so the case stays unresolved. Its
+original expectation is retained in `.harness/sources/ado-story-91.json`; the case owner
+decides whether to revise or retire it, including whether a browser-native loading
+indicator would count.
+The fifteen unresolved story 87
 cases remain documented in [the status table](docs/story-87-status.md); they are not
 included as passing automation. TC126 has a known QA behavior mismatch, so a full run
 may fail while still providing both report artifacts.

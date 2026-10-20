@@ -101,6 +101,8 @@ export class ProductsPage {
 
   async addProductToCart(productName: string): Promise<void> {
     await step(`Add ${productName} to the cart`, async () => {
+      // Search navigation renders cards before the cart click handlers are attached.
+      await this.page.waitForLoadState('load');
       await this.addToCart_button(productName).click();
       await this.continueShopping_button.click();
     });
