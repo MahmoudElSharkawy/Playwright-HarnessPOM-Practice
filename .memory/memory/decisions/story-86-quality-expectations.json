@@ -1,0 +1,19 @@
+{
+  "body_path": "memory/decisions/story-86-quality-expectations.md",
+  "content_hash": "sha256:0ecd74b3835cac60aefeb0c6714723709a90e78cb62d59678cdfb3544b1149bb",
+  "created_at": "2026-10-30T19:02:43+02:00",
+  "evidence": [],
+  "id": "decision.story-86-quality-expectations",
+  "source": {
+    "kind": "agent",
+    "task": "Record owner-agreed quality expectations for story 86"
+  },
+  "status": "active",
+  "tags": [
+    "story-86",
+    "test-expectations"
+  ],
+  "title": "Story 86 quality expectations",
+  "type": "decision",
+  "updated_at": "2026-10-30T19:03:50+02:00"
+}

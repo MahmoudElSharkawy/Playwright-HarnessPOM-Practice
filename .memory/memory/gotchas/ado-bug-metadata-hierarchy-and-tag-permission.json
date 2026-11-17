@@ -1,0 +1,24 @@
+{
+  "anchors": [
+    "package.json",
+    ".harness/integrations.json"
+  ],
+  "body_path": "memory/gotchas/ado-bug-metadata-hierarchy-and-tag-permission.md",
+  "content_hash": "sha256:1ef7564d4889cb6f009d98b79f37dce4a21c8be2fdd357e80f1a5a2d4ec0c017",
+  "created_at": "2026-11-01T11:45:51+02:00",
+  "evidence": [],
+  "id": "gotcha.ado-bug-metadata-hierarchy-and-tag-permission",
+  "source": {
+    "kind": "agent",
+    "task": "Record verified ADO Bug metadata and permission limitations"
+  },
+  "status": "active",
+  "tags": [
+    "ado",
+    "bug-report",
+    "harness-4-3-1"
+  ],
+  "title": "ADO Bug preview blocks on hierarchy metadata and tag permissions",
+  "type": "gotcha",
+  "updated_at": "2026-11-01T11:45:51+02:00"
+}
