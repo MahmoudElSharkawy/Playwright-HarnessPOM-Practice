@@ -1,0 +1,5 @@
+{"actor":"agent","event":"memory.created","id":"decision.story-86-quality-expectations","timestamp":"2026-10-30T19:02:43+02:00"}
+{"actor":"agent","event":"memory.updated","id":"decision.story-86-quality-expectations","timestamp":"2026-10-30T19:03:50+02:00"}
+{"actor":"agent","event":"memory.created","id":"gotcha.ado-case-creation-required-identifiers","timestamp":"2026-10-30T19:15:28+02:00"}
+{"actor":"agent","event":"memory.updated","id":"gotcha.ado-case-creation-required-identifiers","timestamp":"2026-10-30T19:15:58+02:00"}
+{"actor":"agent","event":"memory.created","id":"gotcha.ado-bug-metadata-hierarchy-and-tag-permission","timestamp":"2026-11-01T11:45:51+02:00"}

@@ -1,0 +1,23 @@
+{
+  "anchors": [
+    "package.json"
+  ],
+  "body_path": "memory/gotchas/ado-case-creation-required-identifiers.md",
+  "content_hash": "sha256:ffbd50416b55c903cd5db0497588be8fdf132f97a5492d401af4d7bf2d9f58f8",
+  "created_at": "2026-10-30T19:15:28+02:00",
+  "evidence": [],
+  "id": "gotcha.ado-case-creation-required-identifiers",
+  "source": {
+    "kind": "agent",
+    "task": "Record verified ADO case-publication preflight blocker"
+  },
+  "status": "active",
+  "tags": [
+    "ado",
+    "publication",
+    "harness-4-3-1"
+  ],
+  "title": "Harness 4.3.1 ADO creation blocks required iteration and area IDs",
+  "type": "gotcha",
+  "updated_at": "2026-10-30T19:15:58+02:00"
+}

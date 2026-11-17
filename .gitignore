@@ -183,3 +183,14 @@ plugins/**/__pycache__/
 /.claude/skills/context-qa
 /.claude/skills/context-update
 /.claude/skills/project-context
+
+/.agents/skills/bug-report
+/.agents/skills/impact-analysis
+/.agents/skills/requirements-analysis
+/.agents/skills/test-case-design
+/.agents/skills/test-planning
+/.claude/skills/bug-report
+/.claude/skills/impact-analysis
+/.claude/skills/requirements-analysis
+/.claude/skills/test-case-design
+/.claude/skills/test-planning
